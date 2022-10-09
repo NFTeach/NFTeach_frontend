@@ -1,0 +1,66 @@
+.titleDiv {
+  flex: 1;
+  position: relative;
+  display: inline-block;
+}
+.frameDiv2 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px 10px 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: center;
+}
+.titleDiv1 {
+  align-self: stretch;
+  position: relative;
+  font-size: 25px;
+  display: inline-block;
+  height: 199px;
+  flex-shrink: 0;
+}
+.frameDiv1 {
+  height: 410px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 150px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 103px;
+}
+.frameDiv1,
+.registerButton {
+  align-self: stretch;
+}
+.educatorRegistrationDiv,
+.frameDiv {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+.frameDiv {
+  align-self: stretch;
+  border-radius: 35px;
+  background-color: #121212;
+  height: 751px;
+  flex-shrink: 0;
+  padding: 41px 61px;
+  align-items: center;
+  gap: 150px;
+}
+.educatorRegistrationDiv {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  height: 870px;
+  padding: 68px 196px;
+  align-items: flex-start;
+  text-align: center;
+  font-size: 35px;
+  color: #e4e4e4;
+  font-family: "Mulish", sans-serif;
+}

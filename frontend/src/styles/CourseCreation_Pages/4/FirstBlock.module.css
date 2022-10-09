@@ -1,0 +1,79 @@
+.titleH1 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1290px;
+  height: 80px;
+  flex-shrink: 0;
+}
+.inputOutline {
+  background-color: transparent;
+  align-self: stretch;
+}
+.qUESTION1Div {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 21px;
+}
+.courseNameDiv {
+  position: relative;
+  line-height: 24px;
+  display: inline-block;
+  width: 1256px;
+  height: 43px;
+  flex-shrink: 0;
+}
+.passingGradeDiv {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.frameDiv,
+.frameDiv1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.frameDiv1 {
+  width: 1049px;
+  height: 3337px;
+  flex-shrink: 0;
+  justify-content: center;
+  gap: 50px;
+  text-align: left;
+  font-size: 16px;
+  color: #fff;
+  font-family: Roboto;
+}
+.frameDiv {
+  position: absolute;
+  width: calc(100% - 150px);
+  top: calc(50% - 1865px);
+  right: 75px;
+  left: 75px;
+  height: 3572px;
+  justify-content: flex-start;
+  gap: 100px;
+}
+.courseCreationPage4 {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  height: 3760px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 35px;
+  color: #e4e4e4;
+  font-family: Mulish;
+}

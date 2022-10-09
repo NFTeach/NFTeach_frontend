@@ -1,0 +1,250 @@
+.nFTeachProfileSettings {
+  align-self: stretch;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  flex-shrink: 0;
+}
+.nFTIcon {
+  flex: 1;
+  position: relative;
+  border-radius: 25px;
+  max-width: 100%;
+  height: 435px;
+  object-fit: cover;
+}
+.frameDiv2 {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.textH4,
+.titleH2 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-family: inherit;
+}
+.titleH2 {
+  font-size: inherit;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  height: 49.21px;
+  flex-shrink: 0;
+}
+.textH4 {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 300;
+  color: #c8c8c8;
+  display: inline-block;
+}
+.aboutDiv,
+.frameDiv3 {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameDiv3 {
+  flex-direction: column;
+  gap: 44px;
+}
+.aboutDiv {
+  border-radius: 25px;
+  background-color: #121212;
+  border: 3px solid #e4e4e4;
+  box-sizing: border-box;
+  position: relative;
+  flex-direction: row;
+  padding: 31px 26px;
+}
+.frameDiv1,
+.titleH21 {
+  display: flex;
+  align-items: center;
+}
+.frameDiv1 {
+  flex: 1;
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 62px;
+}
+.titleH21 {
+  font-size: 25px;
+  font-weight: 700;
+  color: rgba(152, 152, 152, 0.69);
+  height: 51px;
+  flex-shrink: 0;
+}
+.addressH4,
+.editButtonH4,
+.nameH4,
+.studentEducatorH4,
+.titleH21 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-family: inherit;
+}
+.nameH4 {
+  font-size: 30px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  flex-shrink: 0;
+}
+.addressH4,
+.editButtonH4,
+.studentEducatorH4 {
+  font-weight: 400;
+}
+.editButtonH4 {
+  font-size: 20px;
+  display: inline-block;
+}
+.addressH4,
+.studentEducatorH4 {
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  height: 39px;
+  flex-shrink: 0;
+}
+.studentEducatorH4 {
+  height: 38px;
+}
+.dateJoinedTxt {
+  line-break: anywhere;
+}
+.dateJoinedH4 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.frameDiv5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.aboutDiv1,
+.buttonSolidTextAndIcon,
+.frameDiv5 {
+  align-self: stretch;
+}
+.aboutDiv1 {
+  flex: 1;
+  border-radius: 25px;
+  background-color: #121212;
+  border: 3px solid #e4e4e4;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 31px 26px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.titleB {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-block;
+}
+.frameH2,
+.numberOfDays {
+  margin: 0;
+  position: relative;
+  font-family: inherit;
+}
+.frameH2 {
+  width: 170px;
+  height: 65px;
+  flex-shrink: 0;
+  font-size: inherit;
+}
+.numberOfDays {
+  align-self: stretch;
+  font-size: 125px;
+  font-weight: 400;
+  color: #de9c3a;
+  text-align: center;
+  display: inline-block;
+}
+.streakDiv {
+  flex: 1;
+  border-radius: 25px;
+  background-color: #121212;
+  border: 3px solid #e4e4e4;
+  box-sizing: border-box;
+  position: relative;
+  flex-direction: column;
+  padding: 31px 26px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 44px;
+  font-size: 25px;
+  color: rgba(152, 152, 152, 0.69);
+}
+.frameDiv,
+.frameDiv4,
+.streakDiv {
+  align-self: stretch;
+  display: flex;
+}
+.frameDiv4 {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 72px;
+  font-size: 18px;
+  color: #c8c8c8;
+}
+.frameDiv {
+  height: 952px;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 150px;
+  text-align: left;
+  color: rgba(152, 152, 152, 0.69);
+}
+.profilePageDiv {
+  position: relative;
+  background-color: #18191a;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 81px 218px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 64px;
+  text-align: center;
+  font-size: 25px;
+  color: #e4e4e4;
+  font-family: Inter;
+}

@@ -1,0 +1,260 @@
+.cardsDefault,
+.sheetDiv {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.sheetDiv {
+  height: 100%;
+  bottom: 0;
+  border-radius: 8px;
+  background-color: #3eb489;
+}
+.cardsDefault {
+  border-radius: 25px;
+  height: 150px;
+}
+.b,
+.sBTsIssuedH3 {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+}
+.sBTsIssuedH3 {
+  margin: 0;
+  font-size: inherit;
+  letter-spacing: 0.4px;
+  font-weight: 700;
+  font-family: inherit;
+}
+.b {
+  font-size: 45px;
+  letter-spacing: 1px;
+  color: #e4e4e4;
+}
+.frameDiv1 {
+  position: absolute;
+  height: calc(100% - 48.13px);
+  width: calc(100% - 85.99px);
+  top: 29.1px;
+  right: 37.69px;
+  bottom: 19.03px;
+  left: 48.3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+}
+.groupDiv {
+  flex: 1;
+  position: relative;
+  height: 150px;
+  color: #121212;
+}
+.cardsDefault1,
+.sheetDiv1 {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+}
+.sheetDiv1 {
+  height: 100%;
+  bottom: 0;
+  border-radius: 8px;
+  background-color: #121212;
+}
+.cardsDefault1 {
+  border-radius: 25px;
+  height: 150px;
+}
+.frameDiv2 {
+  position: absolute;
+  height: calc(100% - 69.17px);
+  width: calc(100% - 85.95px);
+  top: 31.34px;
+  right: 44.53px;
+  bottom: 37.82px;
+  left: 41.43px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.groupDiv1 {
+  flex: 1;
+  position: relative;
+  height: 150px;
+}
+.frameDiv {
+  position: absolute;
+  width: calc(100% - 275px);
+  top: 82px;
+  right: 138px;
+  left: 137px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 87px;
+}
+.yourCoursesDiv {
+  flex: 1;
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  height: 38px;
+}
+.frameDiv7,
+.frameH3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.frameH3 {
+  margin: 0;
+  flex: 1;
+  align-items: center;
+  font-size: inherit;
+  font-family: inherit;
+}
+.frameDiv7 {
+  align-self: stretch;
+  align-items: flex-start;
+}
+.chemistry101H4 {
+  display: flex;
+  align-items: center;
+  width: 528.58px;
+  height: 47px;
+  flex-shrink: 0;
+}
+.blockchainBasicsH4,
+.chemistry101H4,
+.math101H4 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+}
+.math101H4 {
+  display: flex;
+  align-items: center;
+  width: 528.62px;
+  height: 54px;
+  flex-shrink: 0;
+}
+.blockchainBasicsH4 {
+  display: inline-block;
+}
+.frameDiv9 {
+  align-self: stretch;
+  gap: 32px;
+}
+.frameDiv6,
+.frameDiv8,
+.frameDiv9 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameDiv8 {
+  width: 616px;
+  font-size: 20px;
+  color: #fff;
+}
+.frameDiv6 {
+  position: absolute;
+  top: 40px;
+  left: 44px;
+  gap: 74px;
+}
+.frameDiv5 {
+  flex: 1;
+  position: relative;
+  border-radius: 15px;
+  background-color: #121212;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+  height: 622px;
+  overflow: hidden;
+}
+.helpH2 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+  display: inline-block;
+  height: 38px;
+  flex-shrink: 0;
+}
+.buttonSolidTextAndIcon,
+.frameDiv12,
+.helpH2 {
+  align-self: stretch;
+}
+.frameDiv12 {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 66px;
+}
+.frameDiv10,
+.frameDiv11,
+.frameDiv12,
+.frameDiv4 {
+  display: flex;
+  justify-content: flex-start;
+}
+.frameDiv11 {
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 66px;
+}
+.frameDiv10,
+.frameDiv4 {
+  flex-direction: row;
+  align-items: flex-start;
+}
+.frameDiv10 {
+  flex: 1;
+  border-radius: 15px;
+  background-color: #131313;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+  position: relative;
+  height: 622px;
+  padding: 30px 66px 0;
+}
+.frameDiv4 {
+  position: absolute;
+  width: calc(100% - 276px);
+  top: 334px;
+  right: 139px;
+  left: 137px;
+  gap: 125px;
+  text-align: left;
+  font-size: 35px;
+  color: #878787;
+}
+.educatorDashboardDiv {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  height: 1015px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 25px;
+  color: #9fa2b4;
+  font-family: Mulish;
+}

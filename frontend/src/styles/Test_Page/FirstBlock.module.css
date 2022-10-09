@@ -1,0 +1,163 @@
+.questionNumberTitle {
+margin: 0;
+align-self: stretch;
+position: relative;
+font-size: inherit;
+font-weight: 400;
+font-family: inherit;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 52px;
+flex-shrink: 0;
+}
+.frameDiv1 {
+border-radius: 6px;
+background-color: #38a169;
+height: 87px;
+flex-shrink: 0;
+display: flex;
+flex-direction: column;
+padding: 17px 49px;
+box-sizing: border-box;
+align-items: flex-start;
+justify-content: flex-start;
+}
+.frameDiv1,
+.progressDefault {
+align-self: stretch;
+}
+.questionNumberTitle1 {
+margin: 0;
+align-self: stretch;
+position: relative;
+font-size: inherit;
+font-weight: 400;
+font-family: inherit;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 89px;
+flex-shrink: 0;
+}
+.frameDiv5 {
+align-self: stretch;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+gap: 31px;
+}
+.frameDiv4,
+.lineDiv {
+align-self: stretch;
+box-sizing: border-box;
+}
+.frameDiv4 {
+display: flex;
+flex-direction: column;
+padding: 0 200px;
+align-items: center;
+justify-content: flex-start;
+}
+.lineDiv {
+position: relative;
+border-top: 1px solid #e4e4e4;
+height: 1px;
+flex-shrink: 0;
+}
+.frameDiv8 {
+width: 621px;
+height: 459px;
+flex-shrink: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+}
+.frameDiv10,
+.frameDiv9 {
+flex: 1;
+display: flex;
+box-sizing: border-box;
+}
+.frameDiv10 {
+height: 438px;
+flex-direction: column;
+padding: 10px 0 0 250px;
+align-items: center;
+justify-content: flex-start;
+gap: 116px;
+}
+.frameDiv9 {
+height: 459px;
+flex-direction: row;
+padding: 0 0 0 84px;
+align-items: flex-start;
+justify-content: center;
+margin-left: -325px;
+}
+.frameDiv7 {
+width: 659px;
+flex-shrink: 0;
+display: flex;
+}
+.frameDiv6,
+.frameDiv7 {
+flex-direction: row;
+align-items: flex-start;
+justify-content: center;
+}
+.frameDiv11,
+.frameDiv3,
+.frameDiv6 {
+align-self: stretch;
+display: flex;
+}
+.frameDiv3 {
+height: 963px;
+flex-shrink: 0;
+flex-direction: column;
+align-items: center;
+justify-content: flex-start;
+gap: 100px;
+}
+.frameDiv11 {
+flex-direction: row;
+align-items: flex-start;
+justify-content: space-between;
+}
+.frameDiv2 {
+align-self: stretch;
+border-radius: 6px;
+background-color: #121212;
+height: 1030px;
+flex-shrink: 0;
+padding: 0 20px;
+box-sizing: border-box;
+font-size: 35px;
+}
+.frameDiv,
+.frameDiv2,
+.testPageDiv {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+}
+.frameDiv {
+align-self: stretch;
+gap: 108px;
+}
+.testPageDiv {
+position: relative;
+background-color: #181919;
+width: 100%;
+height: 1344px;
+padding: 55px 117px 0;
+box-sizing: border-box;
+text-align: center;
+font-size: 25px;
+color: #e4e4e4;
+font-family: Mulish;
+}

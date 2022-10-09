@@ -1,0 +1,29 @@
+.frameDiv,
+.titleH1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.titleH1 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: "Mulish", sans-serif;
+  justify-content: center;
+  width: 1440px;
+  height: 33px;
+  flex-shrink: 0;
+}
+.frameDiv {
+  background-color: #121212;
+  width: 100%;
+  height: 45px;
+  flex-direction: row;
+  padding: 25px 173px 25px 0;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  text-align: center;
+  font-size: 19px;
+  color: #e4e4e4;
+  font-family: "Mulish", sans-serif;
+}

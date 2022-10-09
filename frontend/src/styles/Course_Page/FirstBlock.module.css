@@ -1,0 +1,67 @@
+.dropdownDefaultMenu,
+.frameVideo {
+  align-self: stretch;
+}
+.frameVideo {
+  background-color: #d9d9d9;
+  height: 475px;
+  flex-shrink: 0;
+}
+.rectangleTextarea {
+  flex: 1;
+  align-self: stretch;
+  position: relative;
+}
+.frameDiv2,
+.frameDiv3 {
+  height: 70px;
+  display: flex;
+}
+.frameDiv3 {
+  flex: 1;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameDiv2 {
+  align-self: stretch;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.courseDiv,
+.frameDiv,
+.frameDiv1 {
+  display: flex;
+  flex-direction: column;
+}
+.frameDiv1 {
+  align-self: stretch;
+  padding: 0 0 200px;
+  box-sizing: border-box;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 50px;
+}
+.courseDiv,
+.frameDiv {
+  justify-content: flex-start;
+}
+.frameDiv {
+  align-self: stretch;
+  height: 958px;
+  flex-shrink: 0;
+  align-items: flex-end;
+}
+.courseDiv {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  height: 1273px;
+  padding: 57px 50px;
+  box-sizing: border-box;
+  align-items: flex-start;
+}

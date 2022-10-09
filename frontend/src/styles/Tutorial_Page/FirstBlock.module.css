@@ -1,0 +1,283 @@
+.pNGImage10 {
+  position: relative;
+  width: 263px;
+  height: 273px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.titleB {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+}
+.ourResponseWhy {
+  font-weight: 600;
+}
+.ourResponseWhyShouldntIt {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+.nowAnyoneIs {
+  font-weight: 600;
+  font-family: "Mulish", sans-serif;
+}
+.gamingIsFunAndMostOfThe {
+  margin: 0;
+}
+.frameDiv2 {
+  flex: 1;
+  height: 278px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 120px 0 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+.frameDiv,
+.frameDiv1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.frameDiv1 {
+  flex: 1;
+  height: 318px;
+}
+.frameDiv {
+  position: absolute;
+  width: calc(100% - -2px);
+  top: calc(50% - -137.5px);
+  right: 1px;
+  left: -3px;
+  background-color: #181919;
+  height: 317px;
+  padding: 0 50px 0 140px;
+  box-sizing: border-box;
+  gap: 100px;
+}
+.titleH2,
+.titleH4 {
+  margin: 0;
+  position: relative;
+  font-family: "Mulish", sans-serif;
+  display: inline-block;
+}
+.titleH2 {
+  align-self: stretch;
+  font-size: inherit;
+  font-weight: 700;
+}
+.titleH4 {
+  font-size: 18px;
+  font-weight: 400;
+  width: 539px;
+}
+.frameDiv5,
+.frameDiv6 {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameDiv6 {
+  flex-direction: column;
+  gap: 28px;
+}
+.frameDiv5 {
+  flex-direction: row;
+  padding: 0 100px 0 0;
+  box-sizing: border-box;
+}
+.pNGImage6 {
+  position: relative;
+  width: 267px;
+  height: 255px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.frameDiv3,
+.frameDiv4 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.frameDiv4 {
+  flex: 1;
+  padding: 0 260px 0 200px;
+  box-sizing: border-box;
+  gap: 87px;
+}
+.frameDiv3 {
+  position: absolute;
+  width: calc(100% - -2px);
+  top: 1210px;
+  right: 0;
+  left: -2px;
+  background-color: #272627;
+  height: 301px;
+}
+.textH1,
+.weCraftedATutorialToHelp {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+  font-family: "Mulish", sans-serif;
+}
+.textH1 {
+  font-size: inherit;
+  font-weight: 600;
+}
+.weCraftedATutorialToHelp {
+  font-size: 18px;
+}
+.frameDiv8 {
+  width: 702px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 55px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 50px;
+}
+.whatIsEthereum1Icon {
+  position: relative;
+  width: 334px;
+  height: 255px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.frameDiv7 {
+  position: absolute;
+  width: calc(100% - 251px);
+  top: 35px;
+  right: 100px;
+  left: 151px;
+  height: 274px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 55px;
+  font-size: 33px;
+}
+.pNGImage12 {
+  position: relative;
+  width: 133px;
+  height: 204px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.textH41 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Mulish", sans-serif;
+  display: inline-block;
+}
+.frameDiv10,
+.frameDiv11,
+.frameDiv9 {
+  display: flex;
+  justify-content: flex-start;
+}
+.frameDiv11 {
+  flex: 1;
+  flex-direction: column;
+  padding: 0 146px 0 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+  gap: 25px;
+}
+.frameDiv10,
+.frameDiv9 {
+  flex-direction: row;
+  align-items: center;
+}
+.frameDiv10 {
+  flex: 1;
+  gap: 150px;
+}
+.frameDiv9 {
+  position: absolute;
+  width: 100%;
+  top: 309px;
+  right: -4px;
+  left: 4px;
+  background-color: #121212;
+  height: 242px;
+  padding: 0 0 0 200px;
+  box-sizing: border-box;
+}
+.similarToLevels {
+  font-family: "Mulish", sans-serif;
+}
+.textTxtSpan {
+  line-break: anywhere;
+}
+.frameDiv13,
+.textH42 {
+  display: flex;
+  align-items: center;
+}
+.textH42 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: 18px;
+  height: 191px;
+  flex-shrink: 0;
+  font-family: "Mulish", sans-serif;
+}
+.frameDiv13 {
+  flex: 1;
+  height: 340px;
+  flex-direction: column;
+  padding: 0 0 0 140px;
+  box-sizing: border-box;
+  justify-content: center;
+  gap: 25px;
+}
+.pNGImage14 {
+  position: relative;
+  width: 455px;
+  height: 273px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.frameDiv12 {
+  position: absolute;
+  width: 100%;
+  top: 551px;
+  right: 3px;
+  left: -3px;
+  background-color: #212130;
+  height: 343px;
+  display: flex;
+  flex-direction: row;
+  padding: 0 100px 0 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+}
+.tutorialDiv {
+  position: relative;
+  background-color: #18191a;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 1511px;
+  overflow: hidden;
+  text-align: left;
+  font-size: 25px;
+  color: #e4e4e4;
+  font-family: "Mulish", sans-serif;
+}

@@ -1,0 +1,228 @@
+.pNGImage9 {
+  position: relative;
+  width: 380px;
+  height: 376px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.funSpan {
+  color: #f07592;
+}
+.titleB {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+}
+.weThoughtOnline {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+.dontBelieveUs,
+.textH4 {
+  margin: 0;
+}
+.textH4 {
+  align-self: stretch;
+  position: relative;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Mulish", sans-serif;
+  display: inline-block;
+}
+.frameDiv2,
+.frameDiv3 {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+}
+.frameDiv3 {
+  flex: 1;
+  height: 212px;
+  flex-direction: column;
+  padding: 0 259px 0 35px;
+  justify-content: flex-start;
+  gap: 30px;
+}
+.frameDiv2 {
+  background-color: #212130;
+  width: 1440px;
+  height: 472px;
+  flex-shrink: 0;
+  flex-direction: row;
+  padding: 0 0 5px 134px;
+  justify-content: center;
+  gap: 127px;
+}
+.frameDiv,
+.frameDiv1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.frameDiv1 {
+  width: 1440px;
+  height: 472px;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+.frameDiv {
+  position: absolute;
+  width: calc(100% - -10px);
+  top: 294px;
+  right: -3px;
+  left: -7px;
+  height: 467px;
+  justify-content: center;
+  text-align: left;
+}
+.textH3,
+.titleH1 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: "Mulish", sans-serif;
+  display: inline-block;
+}
+.textH3 {
+  font-size: 20px;
+  font-weight: 300;
+  color: #919191;
+}
+.frameDiv4,
+.frameDiv5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.frameDiv5 {
+  align-self: stretch;
+  justify-content: center;
+  gap: 16px;
+}
+.frameDiv4 {
+  position: absolute;
+  width: calc(100% - -7px);
+  top: 60px;
+  right: -3px;
+  left: -4px;
+  justify-content: flex-start;
+  gap: 45px;
+  font-size: 45px;
+}
+.polygonSpan {
+  color: #8247e5;
+}
+.textH41,
+.titleB1 {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+}
+.titleB1 {
+  line-height: 130%;
+}
+.textH41 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Mulish", sans-serif;
+}
+.frameDiv7 {
+  width: 770px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 172px;
+  box-sizing: border-box;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 30px;
+}
+.pNGImage8 {
+  position: relative;
+  width: 295px;
+  height: 264px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.frameDiv6,
+.titleB2 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.frameDiv6 {
+  width: calc(100% - -4px);
+  top: 764px;
+  right: 3px;
+  left: -7px;
+  background-color: #292929;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+  height: 298px;
+  flex-direction: row;
+  padding: 25px 173px 25px 0;
+  justify-content: flex-start;
+  gap: 136px;
+  text-align: left;
+}
+.titleB2 {
+  top: calc(50% - -378px);
+  left: calc(50% - 720px);
+  font-size: 25px;
+  line-height: 130%;
+  justify-content: center;
+  width: 1434px;
+}
+.picture21Icon {
+  position: relative;
+  width: 175px;
+  height: 175px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.titleH2 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  line-height: 130%;
+  font-weight: 700;
+  font-family: "Mulish", sans-serif;
+  display: inline-block;
+}
+.frameDiv8,
+.frameDiv9 {
+  display: flex;
+  justify-content: flex-start;
+}
+.frameDiv9 {
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 37px;
+}
+.frameDiv8 {
+  position: absolute;
+  width: calc(100% - 383px);
+  top: 1196px;
+  right: 192px;
+  left: 191px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 25px;
+}
+.welcomePageDiv {
+  position: relative;
+  background-color: #18191a;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 1470px;
+  text-align: center;
+  font-size: 28px;
+  color: #e4e4e4;
+  font-family: "Mulish", sans-serif;
+}

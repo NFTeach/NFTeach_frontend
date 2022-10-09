@@ -1,0 +1,23 @@
+// Chain
+export const CHAIN = "mumbai";
+export const CHAIN_ID = "80001";
+
+// Staking Requirements (in WMATIC)
+export const STAKING_ALLOWANCE = 0.0001;
+export const STAKING_REQUIREMENT = 0.0001;
+
+// Contract addresses Goerli (Outdated)
+// export const SBT_CONTRACT_ADDRESS = "0xAD62cE8Dcac814383E72d36d0725DF87A7B7dFA7";
+// export const GOVERNOR_CONTRACT_ADDRESS = "0xca02b5EA352f715fb361756cfeCc08cDD8ba6781";
+
+// Contract addresses Mumbai
+export const SBT_CONTRACT_ADDRESS = "0x2e30D3415087B94adF8cA0D0d535d954E1cE6a58";
+export const GOVERNOR_CONTRACT_ADDRESS = "0x4f4986336dC10DB521d21e784c3165Fc06630e28";
+
+// WETH and AWETH addresses Goerli (AAVE) (Outdated)
+// export const WETH_ADDRESS = "0x2e3A2fb8473316A02b8A297B982498E661E1f6f5";
+// export const AWETH_ADDRESS = "0x27B4692C93959048833f40702b22FE3578E77759";
+
+// WMATIC and AWMATIC addresses Mumbai (AAVE)
+export const WMATIC_ADDRESS = "0xb685400156cF3CBE8725958DeAA61436727A30c3";
+export const AWMATIC_ADDRESS = "0x89a6AE840b3F8f489418933A220315eeA36d11fF";

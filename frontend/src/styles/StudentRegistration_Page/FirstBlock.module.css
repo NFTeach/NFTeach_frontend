@@ -1,0 +1,184 @@
+.createAnAccount {
+  flex: 1;
+  position: relative;
+  font-size: 42px;
+  font-weight: 500;
+  font-family: "Mulish", sans-serif;
+  color: #e4e4e4;
+  text-align: left;
+  display: inline-block;
+}
+.frameDiv1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+.usernameDiv {
+  align-self: stretch;
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "Mulish", sans-serif;
+  color: #e4e4e4;
+  text-align: left;
+  display: inline-block;
+}
+.inputOutline {
+  background-color: transparent;
+  align-self: stretch;
+}
+.frameDiv4,
+.interestsDiv {
+  align-self: stretch;
+  display: flex;
+}
+.frameDiv4 {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 7px;
+}
+.interestsDiv {
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "Mulish", sans-serif;
+  color: #e4e4e4;
+  text-align: left;
+  align-items: center;
+  height: 35px;
+  flex-shrink: 0;
+}
+.frameDiv3,
+.frameDiv5 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.frameDiv5 {
+  align-self: stretch;
+  align-items: center;
+  gap: 7px;
+}
+.frameDiv3 {
+  align-items: flex-start;
+  gap: 15px;
+}
+.buttonSolidTextAndIcon,
+.frameDiv3 {
+  align-self: stretch;
+}
+.frameDiv,
+.frameDiv2 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 70px;
+}
+.frameDiv {
+  padding: 0 0 0 100px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  gap: 45px;
+}
+.inputsForm,
+.rightColumnElements {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.inputsForm {
+  align-self: stretch;
+  flex-shrink: 0;
+}
+.rightColumnElements {
+  flex: 1;
+  padding: 0 50px 0 0;
+  box-sizing: border-box;
+}
+.learnMoreWith {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+.nFTeachP {
+  margin: 0;
+}
+.titleB {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+}
+.frameDiv8,
+.frameDiv9 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.frameDiv9 {
+  font-size: 22px;
+  color: #999;
+}
+.cultureCryptocurrency1Icon {
+  position: relative;
+  width: 264px;
+  height: 246px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.frameDiv10 {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameDiv6,
+.frameDiv7,
+.titleDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.frameDiv7 {
+  align-self: stretch;
+  justify-content: flex-start;
+  gap: 36px;
+}
+.frameDiv6,
+.titleDiv {
+  flex: 1;
+  justify-content: center;
+}
+.frameDiv6 {
+  align-self: stretch;
+  padding: 120px 0 0;
+  box-sizing: border-box;
+}
+.titleDiv {
+  height: 800px;
+}
+.studentRegistrationDiv {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  height: 800px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: center;
+  font-size: 38px;
+  color: #e4e4e4;
+  font-family: "Mulish", sans-serif;
+}

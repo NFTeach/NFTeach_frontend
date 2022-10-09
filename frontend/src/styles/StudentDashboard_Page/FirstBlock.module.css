@@ -1,0 +1,459 @@
+.cardsDefault,
+.sheetDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+}
+.sheetDiv {
+  height: 100%;
+  width: calc(100% - -0.33px);
+  right: -0.33px;
+  bottom: 0;
+  border-radius: 8px;
+  background-color: #121212;
+}
+.cardsDefault {
+  width: 100%;
+  right: 0;
+  border-radius: 25px;
+  height: 134px;
+}
+.b,
+.yourCompletedCourses {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: 0.4px;
+  display: inline-block;
+}
+.b {
+  font-size: 40px;
+  letter-spacing: 1px;
+  color: #e4e4e4;
+}
+.frameDiv2 {
+  position: absolute;
+  width: calc(100% - 87.73px);
+  top: 24px;
+  right: 43.87px;
+  left: 43.87px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+}
+.completedDiv {
+  flex: 1;
+  position: relative;
+  height: 134px;
+}
+.cardsHover,
+.sheetDiv2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.cardsHover {
+  width: 100%;
+  right: 0;
+  border-radius: 25px;
+  height: 134px;
+}
+.sheetDiv2 {
+  height: 100%;
+  width: calc(100% - -0.33px);
+  right: -0.33px;
+  bottom: 0;
+  border-radius: 8px;
+  background-color: #3eb489;
+}
+.yourSBTsDiv {
+  flex: 1;
+  position: relative;
+  height: 134px;
+  color: #121212;
+}
+.frameDiv1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 56px;
+}
+.dateB {
+  align-self: stretch;
+  position: relative;
+  font-size: 19px;
+  letter-spacing: 0.4px;
+  display: inline-block;
+}
+.comingSoonSpan {
+  color: #e4e4e4;
+}
+.youveCompleted65OfYourL {
+  align-self: stretch;
+  position: relative;
+  font-size: 23px;
+  letter-spacing: 0.4px;
+  display: inline-block;
+  color: #3eb489;
+}
+.frameDiv7 {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 20px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 27px;
+}
+.frameDiv10,
+.inProgressDiv1 {
+  display: flex;
+  align-items: center;
+}
+.inProgressDiv1 {
+  flex: 1;
+  position: relative;
+  letter-spacing: 0.3px;
+  line-height: 22px;
+  font-weight: 600;
+  height: 44px;
+}
+.frameDiv10 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 27px;
+  color: #e4e4e4;
+}
+.math101Div {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: 0.3px;
+  line-height: 22px;
+  display: inline-block;
+  height: 31px;
+  flex-shrink: 0;
+}
+.frameDiv8,
+.frameDiv9 {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.frameDiv9 {
+  padding: 0 0 0 20px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.frameDiv8 {
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 19px;
+  color: #9fa2b4;
+}
+.frameDiv,
+.frameDiv5,
+.frameDiv6 {
+  display: flex;
+  justify-content: flex-start;
+}
+.frameDiv6 {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: center;
+  gap: 200px;
+}
+.frameDiv,
+.frameDiv5 {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.frameDiv5 {
+  align-self: stretch;
+  border-radius: 8px;
+  background-color: #121212;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+  position: relative;
+  padding: 26px 0;
+  text-align: left;
+  font-size: 34px;
+  color: #e4e4e4;
+}
+.frameDiv {
+  position: absolute;
+  width: calc(100% - 267px);
+  top: 142px;
+  right: 133px;
+  left: 134px;
+  gap: 81px;
+}
+.areaDiv,
+.sheetDiv3 {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+.sheetDiv3 {
+  width: 100%;
+  right: 0;
+  border-radius: 8px;
+  background-color: #121212;
+  border: 1px solid #dfe0eb;
+  box-sizing: border-box;
+}
+.areaDiv {
+  width: calc(100% - 0.02px);
+  right: 0.02px;
+}
+.eTHDiv,
+.titleB {
+  display: inline-block;
+}
+.titleB {
+  align-self: stretch;
+  position: relative;
+  font-size: 19px;
+  letter-spacing: 0.4px;
+  text-align: center;
+}
+.eTHDiv {
+  position: absolute;
+  top: calc(50% - 9px);
+  right: 32px;
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #9fa2b4;
+  text-align: right;
+  width: 104px;
+}
+.dividerLineHorizontal {
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: -0.5px;
+  left: 0;
+  max-width: 100%;
+  height: 1px;
+}
+.math102Div {
+  align-self: stretch;
+  position: relative;
+  height: 58px;
+  flex-shrink: 0;
+}
+.eTHDiv1,
+.understandingBitcoinDiv {
+  position: absolute;
+  top: calc(50% - 9px);
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  font-weight: 600;
+  display: inline-block;
+}
+.understandingBitcoinDiv {
+  width: calc(100% - 168px);
+  right: 136px;
+  left: 32px;
+}
+.eTHDiv1 {
+  right: 32px;
+  color: #9fa2b4;
+  text-align: right;
+  width: 80px;
+}
+.frameDiv12 {
+  position: absolute;
+  width: calc(100% - 0.02px);
+  top: 32px;
+  right: 0.02px;
+  left: 0;
+  height: 296px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.suggestedDiv {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 336px;
+  overflow: hidden;
+}
+.groupDiv {
+  flex: 1;
+  position: relative;
+  height: 336px;
+}
+.sheetDiv4 {
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 0.02px);
+  top: 0;
+  right: 0.02px;
+  bottom: 0;
+  left: 0;
+  border-radius: 8px;
+  background-color: #121212;
+  border: 1px solid #dfe0eb;
+  box-sizing: border-box;
+}
+.thisWeekDiv,
+.titleB1 {
+  position: relative;
+  letter-spacing: 0.4px;
+  display: inline-block;
+}
+.thisWeekDiv {
+  align-self: stretch;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+  color: #9fa2b4;
+  height: 16px;
+  flex-shrink: 0;
+}
+.frameDiv14 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.satoshiNDiv,
+.topStudentsDiv {
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  font-weight: 600;
+  display: inline-block;
+}
+.topStudentsDiv {
+  position: absolute;
+  width: calc(100% - 210px);
+  top: calc(50% - 10px);
+  right: 105px;
+  left: 105px;
+}
+.satoshiNDiv {
+  align-self: stretch;
+  position: relative;
+}
+.dividerLineHorizontal4 {
+  align-self: stretch;
+  position: relative;
+  max-width: 100%;
+  height: 1px;
+  flex-shrink: 0;
+}
+.name1Div,
+.name2Div {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 19px 0 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 19px;
+}
+.name2Div {
+  gap: 18px;
+  color: #e4e4e4;
+}
+.silvioMDiv {
+  flex: 1;
+  position: relative;
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  font-weight: 600;
+  display: inline-block;
+}
+.frameDiv15,
+.name3Div {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.name3Div {
+  flex-direction: row;
+  padding: 19px 0 0;
+  box-sizing: border-box;
+  color: #e4e4e4;
+}
+.frameDiv15 {
+  flex-direction: column;
+  font-size: 14px;
+  color: #c5c7cd;
+}
+.frameDiv13,
+.groupDiv1 {
+  position: absolute;
+  left: 0;
+}
+.frameDiv13 {
+  width: 100%;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+}
+.groupDiv1 {
+  width: calc(100% - 0.02px);
+  top: 30px;
+  right: 0.02px;
+  height: 276px;
+}
+.areaDiv1 {
+  flex: 1;
+  position: relative;
+  height: 336px;
+  text-align: center;
+  font-size: 19px;
+}
+.frameDiv11 {
+  position: absolute;
+  width: calc(100% - 266.97px);
+  top: 689px;
+  right: 132.97px;
+  left: 134px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 111px;
+  text-align: left;
+  font-size: 14px;
+  color: #e4e4e4;
+}
+.studentDashboardDiv {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  height: 1091px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 19px;
+  color: #9fa2b4;
+  font-family: Mulish;
+}

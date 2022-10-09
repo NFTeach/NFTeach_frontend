@@ -1,0 +1,134 @@
+.titleDiv {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+  height: 80px;
+  flex-shrink: 0;
+}
+.frameDiv1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.titleDiv1 {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+  height: 130px;
+  flex-shrink: 0;
+}
+.frameDiv,
+.frameDiv2 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.frameDiv2 {
+  height: 140px;
+  flex-shrink: 0;
+  padding: 0 200px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.frameDiv {
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 55px;
+}
+.titleDiv2,
+.titleDiv3 {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+}
+.titleDiv3 {
+  font-size: 15px;
+  font-weight: 300;
+}
+.frameDiv5 {
+  width: 867px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+}
+.titleDiv4 {
+  position: relative;
+  display: inline-block;
+  width: 620px;
+  height: 51px;
+  flex-shrink: 0;
+}
+.frameDiv4,
+.frameDiv6,
+.frameDiv7,
+.uploadFormDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.uploadFormDiv {
+  border-radius: 15px;
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  position: relative;
+  width: 878px;
+  height: 176px;
+  flex-shrink: 0;
+  padding: 19px 140px;
+  justify-content: space-between;
+  text-align: center;
+  font-size: 45px;
+  color: #f2f2f2;
+  font-family: "Mulish", sans-serif;
+}
+.frameDiv4,
+.frameDiv6,
+.frameDiv7 {
+  align-self: stretch;
+}
+.frameDiv4 {
+  justify-content: flex-start;
+  gap: 16px;
+}
+.frameDiv6,
+.frameDiv7 {
+  justify-content: center;
+}
+.frameDiv6 {
+  height: 108px;
+  flex-shrink: 0;
+  padding: 0 10px 10px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.courseCreationPage2,
+.frameDiv3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 55px;
+}
+.frameDiv3 {
+  align-self: stretch;
+  align-items: flex-start;
+  text-align: left;
+  font-size: 25px;
+}
+.courseCreationPage2 {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  padding: 41px 0;
+  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
+  font-size: 35px;
+  color: #e4e4e4;
+  font-family: "Mulish", sans-serif;
+}

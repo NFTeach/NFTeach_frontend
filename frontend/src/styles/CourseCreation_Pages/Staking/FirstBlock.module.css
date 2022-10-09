@@ -1,0 +1,64 @@
+.titleDiv {
+  flex: 1;
+  position: relative;
+  display: inline-block;
+}
+.frameDiv2 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px 10px 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: center;
+}
+.titleTxtSpan {
+  line-break: anywhere;
+}
+.frameDiv1,
+.titleDiv1 {
+  align-self: stretch;
+  flex-shrink: 0;
+  align-items: center;
+}
+.titleDiv1 {
+  position: relative;
+  font-size: 20px;
+  display: flex;
+  height: 129px;
+}
+.frameDiv1 {
+  height: 243px;
+  padding: 0 100px;
+  gap: 50px;
+}
+.frameDiv,
+.frameDiv1,
+.stakingPageDiv {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+.frameDiv {
+  align-self: stretch;
+  border-radius: 35px;
+  background-color: #121212;
+  height: 628px;
+  flex-shrink: 0;
+  padding: 41px 0 0;
+  align-items: center;
+  gap: 100px;
+}
+.stakingPageDiv {
+  position: relative;
+  background-color: #181919;
+  width: 100%;
+  height: 779px;
+  padding: 68px 196px 0;
+  align-items: flex-start;
+  text-align: center;
+  font-size: 35px;
+  color: #e4e4e4;
+  font-family: Mulish;
+}

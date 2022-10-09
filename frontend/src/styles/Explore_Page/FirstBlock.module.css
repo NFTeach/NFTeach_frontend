@@ -1,0 +1,113 @@
+.imageIcon {
+  align-self: stretch;
+  position: relative;
+  max-height: 100%;
+  width: 404px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.educationThatsH1,
+.outOfThisWorld {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: "Mulish", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 839.5px;
+  height: 97px;
+  flex-shrink: 0;
+  font-size: 55px;
+}
+.outOfThisWorld {
+  color: #e09e3b;
+  height: 73px;
+  font-size: 55px;
+}
+.frameDiv3 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 60px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 20px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.chooseACourseBelowToStart {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Mulish", sans-serif;
+  display: inline-block;
+}
+.frameDiv1,
+.frameDiv2 {
+  display: flex;
+  align-items: center;
+}
+.frameDiv2 {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+.frameDiv1 {
+  align-self: stretch;
+  height: 422px;
+  flex-shrink: 0;
+  flex-direction: row;
+  padding: 0 0 0 79px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+.frameDiv4 {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-family: "Mulish", sans-serif;
+}
+.frameDiv {
+  position: absolute;
+  width: calc(100% - 117.5px);
+  top: 23px;
+  right: 58.5px;
+  left: 59px;
+  height: 866px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 55px;
+}
+.explorePageDiv {
+  position: relative;
+  background-color: #18191a;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 928px;
+  overflow: hidden;
+  text-align: center;
+  color: #e4e4e4;
+  font-family: "Mulish", sans-serif;
+}
+
+.popupClassDescription {
+  position: absolute;
+  width: 50%;
+  height: 70%;
+  background-color: grey;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -47%);
+  border-radius: 20px;
+}
