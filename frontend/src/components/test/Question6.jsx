@@ -73,17 +73,20 @@ const Question6 = () => {
 
     useEffect(() => {
         getCourse();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         shuffleAnswers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [question6Answer, fakeQuestion6Answer1, fakeQuestion6Answer2, fakeQuestion6Answer3]);
 
     useEffect(() => {
         checkAnswer();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedAnswer]);
 
-    console.log(q6CorrectAnswerCount);
+    // console.log(q6CorrectAnswerCount);
 
     return (
         <>

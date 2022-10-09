@@ -18,10 +18,10 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import Logo from "../images/Logo.png";
 import stylesHeader from "../styles/Explore_Page/Header.module.css";
 import stylesFirstBlock from "../styles/Explore_Page/FirstBlock.module.css";
 import stylesFooter from "../styles/Explore_Page/Footer.module.css";
-import Logo from "../images/Logo.png";
 import spaceMan from "../images/explore_imgs/spaceMan.png";
 
 moralis.initialize(process.env.REACT_APP_MORALIS_APPLICATION_ID);

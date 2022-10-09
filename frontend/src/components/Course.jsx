@@ -1,3 +1,5 @@
+// ADD BUTTON TO GO BACK TO EXPLORE PAGE
+
 import React, { useState, useEffect } from 'react';
 import {
     Button,
