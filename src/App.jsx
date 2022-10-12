@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import moralis from 'moralis';
-import { useMoralis } from 'react-moralis';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Welcome from './components/Welcome';
 import Tutorial from './components/Tutorial';
@@ -28,31 +27,17 @@ import Question7 from './components/test/Question7';
 import Question8 from './components/test/Question8';
 import Question9 from './components/test/Question9';
 import Question10 from './components/test/Question10';
-// import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 moralis.initialize(process.env.REACT_APP_MORALIS_APPLICATION_ID);
 moralis.serverURL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
 function App({ isServerInfo }) {
-  const history = useHistory();
-  const {
-    isWeb3Enabled,
-    enableWeb3,
-    isAuthenticated,
-    isWeb3EnableLoading,
-  } = useMoralis();
-
-  useEffect(() => {
-    const connectorId = window.localStorage.getItem("connectorId");
-    if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
-      enableWeb3({ provider: connectorId });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, isWeb3Enabled]);
-
+  
   return (
     <>
       <Router>
         <Switch>
+          <Redirect exact path="/" to="/welcome" />
           <Route exact path="/Welcome">
             <Welcome isServerInfo={isServerInfo} />
           </Route>
