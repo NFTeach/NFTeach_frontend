@@ -230,7 +230,7 @@ const EducatorDashboard = () => {
                 >
                   Add Courses
                 </Button>
-                <Button
+                {/* <Button
                   className={stylesFirstBlock.buttonSolidTextAndIcon}
                   variant='solid'
                   colorScheme='green'
@@ -239,7 +239,7 @@ const EducatorDashboard = () => {
                   }}
                 >
                   Check Your Balance on Smart Contract
-                </Button>
+                </Button> */}
                 <div className={stylesFirstBlock.div}>
                   {data && <pre>{Moralis.Units.FromWei(data)} MATIC</pre>}
                 </div>
