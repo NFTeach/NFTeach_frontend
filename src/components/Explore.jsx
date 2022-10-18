@@ -273,7 +273,7 @@ const Explore = () => {
                 }}
               > 
                 <Button
-                variant='ghost'
+                variant='solid'
                 colorScheme='green'
                 mr={3}
                 onClick={async () => {

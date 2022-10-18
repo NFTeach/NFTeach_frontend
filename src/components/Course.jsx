@@ -1,4 +1,5 @@
 // ADD BUTTON TO GO BACK TO EXPLORE PAGE
+// NEED TO REDESIGN THE LOOK OF THIS PAGE (TALK WITH AYUSH)
 
 import React, { useState, useEffect } from 'react';
 import {
@@ -60,7 +61,7 @@ const Course = () => {
 
     useEffect(() => {
         getCourse();
-    }, []);
+    });
 
     return (
         <>
