@@ -1,3 +1,5 @@
+// NEED TO ADD RESTRICTION TO NOT ALLOW SELECTION OF SAME COURSE AS PRE REQ
+
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Input,
@@ -297,7 +299,7 @@ const CourseReview = () => {
         } else {
             setIsSavingInProgress(false);
             console.log("No image file uploaded");
-            return;
+            refreshPage();
         }
 
         const Courses = Moralis.Object.extend("Courses");
@@ -325,7 +327,7 @@ const CourseReview = () => {
         } else {
             setIsSavingInProgress(false);
             console.log("No video file uploaded");
-            return;
+            refreshPage();
         }
 
         const Courses = Moralis.Object.extend("Courses");
@@ -468,10 +470,6 @@ const CourseReview = () => {
 
     const routeCourseStaking = () => {
         history.push("/courseStaking");
-    };
-
-    const routeCourseCreation3 = () => {
-        history.push("/courseCreation3");
     };
 
     const refreshPage = () => {
@@ -664,7 +662,6 @@ const CourseReview = () => {
                         key={coursePrerequisites.id}
                         onChange={(e) => setCoursePrerequisite(e.target.value)}
                     >
-                    {/* NEED TO ADD RESTRICTION TO NOT ALLOW SELECTION OF SAME COURSE AS PRE REQ */}
                     {coursePrerequisites.map((prerequisite) => (
                         <option key={prerequisite.id} value={prerequisite.id}>
                         {prerequisite.get("courseName")}

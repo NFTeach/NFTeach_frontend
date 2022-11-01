@@ -84,7 +84,9 @@ const Question10 = () => {
         setFakeQuestion10Answer2(course[0].get("test").fakeQuestion10Answer2);
         setFakeQuestion10Answer3(course[0].get("test").fakeQuestion10Answer3);
         setPassingGrade(parseInt(course[0].get("test").passingGrade));
+        setMintPrice(course[0].get("cost"));
     };
+    console.log(mintPrice);
 
     const getSBT = async () => {
         const SBT = Moralis.Object.extend("CreateSBT");
@@ -92,7 +94,6 @@ const Question10 = () => {
         query.equalTo("courseObjectId", courseObjectId);
         const sbt = await query.find();
         setTokenId(sbt[0].get("tokenId"));
-        setMintPrice(sbt[0].get("mintPrice"));
     };
 
     const shuffleAnswers = () => {
@@ -145,7 +146,7 @@ const Question10 = () => {
     };
 
     const claimSBT = async () => {
-        // console.log("claiming SBT");
+        console.log("claiming SBT");
         const ValidateTests = Moralis.Object.extend("ValidateTest");
         const query = new Moralis.Query(ValidateTests);
         query.equalTo("student", user.attributes.accounts[0]);
@@ -161,7 +162,7 @@ const Question10 = () => {
                 params: {
                     _tokenId: tokenId,
                 },
-                msgValue: mintPrice,
+                msgValue: Moralis.Units.ETH(mintPrice)
             },
             onSuccess: () => {
                 setIsMintingInProgress(false);
@@ -192,7 +193,7 @@ const Question10 = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedAnswer]);
 
-    // console.log(q10CorrectAnswerCount);
+    console.log(q10CorrectAnswerCount);
 
     const routeStudentDash = () => {
         history.push("/studentDashboard");
@@ -200,6 +201,10 @@ const Question10 = () => {
 
     const routeExplore = () => {
         history.push("/explore");
+    };
+
+    const refreshPage = () => {
+        window.location.reload();
     };
 
     return (
@@ -317,7 +322,11 @@ const Question10 = () => {
             <ModalOverlay />
             <ModalContent>
             <ModalHeader>Test Results</ModalHeader>
-            <ModalCloseButton />
+            <ModalCloseButton
+                onClick={() => {
+                refreshPage();
+                }}
+            />
             {pass ? (
                 <ModalBody>
                 Congrats! You passed the test with a grade of {q10CorrectAnswerCount}
@@ -329,7 +338,6 @@ const Question10 = () => {
                     mr={3}
                     isLoading={isMintingInProgress}
                     onClick={async () => {
-                        isMintingInProgress(true);
                         await validateStudent();
                         setTimeout(claimSBT, 1000);
                     }}

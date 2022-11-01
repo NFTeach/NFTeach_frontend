@@ -1,5 +1,6 @@
 // ADD BUTTON TO GO BACK TO EXPLORE PAGE
 // NEED TO REDESIGN THE LOOK OF THIS PAGE (TALK WITH AYUSH)
+// CODE DOESN'T CHANGE WHEN YOU CHANGE THE SECTION (FIX THIS)
 
 import React, { useState, useEffect } from 'react';
 import {
@@ -28,7 +29,6 @@ const Course = () => {
     const [selectedSectionVideo, setSelectedSectionVideo] = useState();
     const location = useLocation();
     const { courseObjectId } = location.state;
-    // console.log(courseObjectId);
 
     const getCourse = async () => {
         const Courses = Moralis.Object.extend("Courses");
@@ -43,7 +43,7 @@ const Course = () => {
         setSelectedSectionVideo(course[0].get("courseSection1")?.vid);
     };
 
-    const handleSectionChange = (e) => {
+    const handleSectionChange = async (e) => {
         if (e === "1") {
             setSelectedSectionName(courseSection1?.sectionName);
             setSelectedSectionDescription(courseSection1?.sectionDescription);
@@ -61,7 +61,8 @@ const Course = () => {
 
     useEffect(() => {
         getCourse();
-    });
+    }, [selectedSectionName, selectedSectionDescription, selectedSectionVideo]);
+    console.log(selectedSectionName, selectedSectionDescription, selectedSectionVideo);
 
     return (
         <>
@@ -74,9 +75,9 @@ const Course = () => {
                 <div className={stylesFirstBlock.frameDiv}>
                 <div className={stylesFirstBlock.frameDiv1}>
                     <Select color="black" bg="green" onChange={(e) => handleSectionChange(e.target.value)}>
-                    <option value="1">{courseSection1?.sectionName}</option>
-                    <option value="2">{courseSection2?.sectionName}</option>
-                    <option value="3">{courseSection3?.sectionName}</option>
+                        <option value="1">{courseSection1?.sectionName}</option>
+                        <option value="2">{courseSection2?.sectionName}</option>
+                        <option value="3">{courseSection3?.sectionName}</option>
                     </Select>
                     <video className={stylesFirstBlock.frameVideo} src={selectedSectionVideo} controls>
                     <source />
