@@ -86,7 +86,7 @@ const Question8 = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedAnswer]);
 
-    // console.log(q8CorrectAnswerCount);
+    console.log(q8CorrectAnswerCount);
 
     return (
         <>
