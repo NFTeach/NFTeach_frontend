@@ -7,7 +7,24 @@ import {
   useMoralisWeb3Api,
   useMoralisWeb3ApiCall,
 } from "react-moralis";
-import { Button } from "@chakra-ui/react";
+import { 
+  Button, 
+  useDisclosure, 
+  TableContainer, 
+  Table, 
+  Tbody, 
+  Thead, 
+  Tr, 
+  Th, 
+  Td,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody 
+} from "@chakra-ui/react";
+import * as _ from 'lodash';
 import Logo from "../images/Logo.png";
 import { defaultImgs } from "../images/defaultImgs";
 import stylesHeader from "../styles/EducatorDashboard_Page/Header.module.css";
@@ -23,12 +40,15 @@ moralis.serverURL = process.env.REACT_APP_MORALIS_SERVER_URL;
 const EducatorDashboard = () => {
   const history = useHistory();
   const { native } = useMoralisWeb3Api();
-  const [educator, setEducator] = useState();
-  const [coursesCreated, setCoursesCreated] = useState("0");
+  const [coursesCreated, setCoursesCreated] = useState([]);
+  const [courseNames, setCourseNames] = useState([]);
+  const [courseIds, setCourseIds] = useState([]);
+  const [userEnrolledCourses, setUserEnrolledCourses] = useState([]);
+  const [numberOfStudentsEnrolled, setNumberOfStudentsEnrolled] = useState([]);
   const [pfp, setPfp] = useState();
+  const [isWithdrawingInProgress, setIsWithdrawingInProgress] = useState(false);
   const user = moralis.User.current();
   const address = user?.attributes.accounts[0];
-  const [lifetimePayout, setLifetimePayout] = useState("0");
   const {
     Moralis,
     isAuthenticated,
@@ -36,13 +56,34 @@ const EducatorDashboard = () => {
     isWeb3EnableLoading,
     enableWeb3,
   } = useMoralis();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
 
-  const options = {
+  const educatorLifetimePayoutOptions = {
+    chain: CHAIN,
+    address: SBT_CONTRACT_ADDRESS,
+    function_name: "getEducatorLifetimePayout",
+    abi: NFTEACH_SBT_CONTRACT_ABI,
+    params: {
+      _educator: address,
+    },
+  };
+
+  const { 
+    data: educatorLifetimePayoutData,
+    error: educatorLifetimePayoutError, 
+    fetch: educatorLifetimePayoutFetch, 
+    isLoading: educatorLifetimePayoutLoading 
+    } = useMoralisWeb3ApiCall(
+    native.runContractFunction,
+    { ...educatorLifetimePayoutOptions }
+  );
+   
+  const educatorCurrentPayoutOptions = {
     chain: CHAIN,
     address: SBT_CONTRACT_ADDRESS,
     function_name: "getEducatorCurrentPayout",
@@ -52,28 +93,38 @@ const EducatorDashboard = () => {
     },
   };
 
-  const { data, error, fetch, isLoading } = useMoralisWeb3ApiCall(
+  const { 
+    data: educatorCurrentPayoutData,
+    error: educatorCurrentPayoutError, 
+    fetch: educatorCurrentPayoutFetch, 
+    isLoading: educatorCurrentPayoutLoading 
+    } = useMoralisWeb3ApiCall(
     native.runContractFunction,
-    { ...options }
+    { ...educatorCurrentPayoutOptions }
   );
 
-  const options2 = {
-    chain: CHAIN,
-    address: SBT_CONTRACT_ADDRESS,
-    functionName: "getEducatorLifetimePayout",
-    abi: NFTEACH_SBT_CONTRACT_ABI,
-    params: {
-      _educator: address,
-    },
-  };
-
   const {
-    data: educatorData,
+    data,
     error: executeContractError,
     fetch: executeContractFunction,
     isFetching,
-    isLoading: executeContractLoading,
+    isLoading
   } = useWeb3ExecuteFunction();
+
+  useEffect(() => {
+    if (!isFetching && !isLoading && data) {
+      console.log("data", data);
+      setIsWithdrawingInProgress(false);
+      onOpen();
+    }
+  }, [isFetching, isLoading]);
+
+  useEffect(() => {
+    if (executeContractError) {
+      setIsWithdrawingInProgress(false);
+      window.alert("Error withdrawing. Make sure you have paid enough gas and please try again.");
+    }
+  }, [executeContractError]);
 
   const withdrawFunds = async () => {
     executeContractFunction({
@@ -83,7 +134,7 @@ const EducatorDashboard = () => {
         functionName: "withdrawCoursesPayoff",
       },
       onSuccess: () => {
-        console.log("success");
+        setIsWithdrawingInProgress(false);
       },
       onError: (error) => {
         console.log(error);
@@ -91,8 +142,43 @@ const EducatorDashboard = () => {
     });
   };
 
+  const getEducatorCourses = async () => {
+    if (user) {
+      const EducatorCourses = Moralis.Object.extend("Courses");
+      const query = new Moralis.Query(EducatorCourses);
+      const account = user.attributes.accounts[0];
+      query.equalTo("educatorAddress", account);
+      const results = await query.find();
+      setCoursesCreated(results);
+      setCourseNames(results.map((course) => course.attributes.courseName));
+      setCourseIds(results.map((course) => course.id));
+    }
+  };
+  console.log(courseIds);
+
+  const getEnrolledCourses = async () => {
+    if (user) {
+      Moralis.Cloud.run("getAllUser").then((data) => {
+        setUserEnrolledCourses(data.map((user) => user.attributes.enrolledCourses));
+      }) 
+    }
+  };
+  console.log(userEnrolledCourses);
+
+  const getNumberOfStudentsEnrolled = async () => {
+    if (user) {
+      for (let i = 0; i < userEnrolledCourses.length; i++) {
+        setNumberOfStudentsEnrolled(_.intersectionWith(userEnrolledCourses[i], courseIds, _.isEqual).length);
+      }
+    }
+  };
+  console.log(numberOfStudentsEnrolled);
+
   useEffect(() => {
-    if (!user) return null;
+    if(!user) return null;
+    getEducatorCourses();
+    getEnrolledCourses();
+    getNumberOfStudentsEnrolled();
     setPfp(user.get("pfp"));
   }, [user]);
 
@@ -110,6 +196,10 @@ const EducatorDashboard = () => {
 
   const routeCreateCourse = () => {
     history.push("/courseCreation1");
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   return (
@@ -167,7 +257,7 @@ const EducatorDashboard = () => {
             </div>
             <div className={stylesFirstBlock.frameDiv1}>
               <h3 className={stylesFirstBlock.sBTsIssuedH3}>Courses Created</h3>
-              <b className={stylesFirstBlock.b}>{coursesCreated}</b>
+              <b className={stylesFirstBlock.b}>{coursesCreated.length}</b>
             </div>
           </div>
           <div className={stylesFirstBlock.groupDiv1}>
@@ -177,7 +267,18 @@ const EducatorDashboard = () => {
             <div className={stylesFirstBlock.frameDiv2}>
               LifeTime Income
               <div className={stylesFirstBlock.div}>
-                {lifetimePayout && <pre>{Moralis.Units.FromWei(lifetimePayout)} MATIC</pre>}
+                <Button
+                  className={stylesFirstBlock.buttonSolidTextAndIcon}
+                  variant='solid'
+                  colorScheme='green'
+                  onClick={() => {
+                    educatorLifetimePayoutFetch({ params: educatorLifetimePayoutOptions });
+                  }}
+                  isLoading={educatorLifetimePayoutLoading}
+                >
+                  Fetch Data 
+                </Button>
+                {educatorLifetimePayoutData && <pre>{Moralis.Units.FromWei(educatorLifetimePayoutData)} MATIC</pre>}
               </div>
             </div>
           </div>
@@ -187,36 +288,30 @@ const EducatorDashboard = () => {
             </div>
             <div className={stylesFirstBlock.frameDiv2}>
               <h3 className={stylesFirstBlock.sBTsIssuedH3}>
-                Enrolled Students (Coming Soon)
+                Enrolled Students 
               </h3>
-              <b className={stylesFirstBlock.b}></b>
+              <b className={stylesFirstBlock.b}>{numberOfStudentsEnrolled}</b>
             </div>
           </div>
         </div>
         <div className={stylesFirstBlock.frameDiv4}>
           <div className={stylesFirstBlock.frameDiv5}>
-            <div className={stylesFirstBlock.frameDiv6}>
-              <div className={stylesFirstBlock.frameDiv7}>
-                <h3 className={stylesFirstBlock.frameH3}>
-                  <div className={stylesFirstBlock.yourCoursesDiv}>
-                    Your Courses
-                  </div>
-                </h3>
-              </div>
-              <div className={stylesFirstBlock.frameDiv8}>
-                <div className={stylesFirstBlock.frameDiv9}>
-                  <h4 className={stylesFirstBlock.chemistry101H4}>
-                    Chemistry 101 (Coming Soon)
-                  </h4>
-                  <h4 className={stylesFirstBlock.math101H4}>
-                    Math 101 (Coming Soon)
-                  </h4>
-                  <h4 className={stylesFirstBlock.blockchainBasicsH4}>
-                    Blockchain Basics (Coming Soon)
-                  </h4>
-                </div>
-              </div>
-            </div>
+            <TableContainer maxWidth='100%' overflowY='auto'>
+              <Table size='md'>
+                <Thead>
+                  <Tr>
+                    <Th>Your Courses</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {courseNames.map((courseName) => (
+                    <Tr>
+                      <Td>{courseName}</Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
           </div>
           <div className={stylesFirstBlock.frameDiv10}>
             <div className={stylesFirstBlock.frameDiv11}>
@@ -228,26 +323,27 @@ const EducatorDashboard = () => {
                   colorScheme='green'
                   onClick={routeCreateCourse}
                 >
-                  Add Courses
+                  Create a Course
                 </Button>
-                {/* <Button
+                <Button
                   className={stylesFirstBlock.buttonSolidTextAndIcon}
                   variant='solid'
                   colorScheme='green'
                   onClick={() => {
-                    fetch({ params: options });
+                    educatorCurrentPayoutFetch({ params: educatorCurrentPayoutOptions });
                   }}
+                  isLoading={educatorCurrentPayoutLoading}
                 >
-                  Check Your Balance on Smart Contract
-                </Button> */}
-                <div className={stylesFirstBlock.div}>
-                  {data && <pre>{Moralis.Units.FromWei(data)} MATIC</pre>}
-                </div>
+                  Check Current Balance
+                </Button>
+                {educatorCurrentPayoutData && <pre>{Moralis.Units.FromWei(educatorCurrentPayoutData)} MATIC</pre>}
                 <Button
                   className={stylesFirstBlock.buttonSolidTextAndIcon}
                   variant='solid'
                   colorScheme='cyan'
+                  isLoading={isWithdrawingInProgress}
                   onClick={async () => {
+                    setIsWithdrawingInProgress(true);
                     await withdrawFunds();
                   }}
                 >
@@ -262,6 +358,21 @@ const EducatorDashboard = () => {
       <div className={stylesFooter.frameDiv}>
         <h4 className={stylesFooter.nFTeachH4}>© 2022 NFTeach</h4>
       </div>
+      {/* Withdraw Success Modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Withdraw Success</ModalHeader>
+          <ModalCloseButton
+            onClick={() => {
+            refreshPage();
+            }}
+          />
+          <ModalBody>
+            <p>You have successful withdrawn your funds! They should appear in your wallet shortly.</p>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   )
 }

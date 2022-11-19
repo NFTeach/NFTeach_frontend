@@ -31,13 +31,13 @@ const StudentRegistration = () => {
     useEffect(() => {
         if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [isAuthenticated, isWeb3Enabled]);
+    }, [isAuthenticated, isWeb3Enabled]);
 
     const checkChain = async () => {
         const web3 = await Moralis.Web3.enableWeb3();
         const chain = web3.currentProvider;
         setSelectedAddress(chain.selectedAddress);
-        console.log(chain);
+        // console.log(chain);
         const chainId = chain.networkVersion;
         //   console.log(chainId)
         if (chainId !== CHAIN_ID) {
@@ -53,33 +53,39 @@ const StudentRegistration = () => {
 
     // Save user info to db
     const saveInfo = async () => {
-        await authenticate();
-        const User = Moralis.Object.extend("_User");
-        const query = new Moralis.Query(User);
-        const myDetails = await query.first();
-        // console.log(myDetails)
+        try {
+            await authenticate();
+            const User = Moralis.Object.extend("_User");
+            const query = new Moralis.Query(User);
+            const myDetails = await query.first();
 
-        if (username) {
-        myDetails?.set("username", username);
+            if (username) {
+                myDetails?.set("username", username);
+            }
+
+            if (bio) {
+                myDetails?.set("bio", bio);
+            }
+
+            await myDetails?.save();
+
+            let studentAddressTo = myDetails?.attributes.ethAddress;
+
+            const studentParams = {
+                to: studentAddressTo,
+            };
+
+            async function callAddStudent() {
+                const _Result = await Moralis.Cloud.run("registerStudent", studentParams);
+                console.log(_Result);
+            }
+                callAddStudent();
+            }
+        catch (error) {
+            window.alert(`ERROR: ${error.message} Please pick a new username!`);
+            window.reload();
         }
-
-        if (bio) {
-        myDetails?.set("bio", bio);
-        }
-
-        await myDetails?.save();
-
-        let studentAddressTo = myDetails?.attributes.ethAddress;
-
-        const studentParams = {
-        to: studentAddressTo,
-        };
-
-        async function callAddStudent() {
-        const _Result = await Moralis.Cloud.run("registerStudent", studentParams);
-        console.log(_Result);
-        }
-        callAddStudent();
+        
     };
 
     const routeChange = () => {
@@ -140,7 +146,7 @@ const StudentRegistration = () => {
                         routeChange();
                     }}
                     >
-                    Connect Wallet
+                    Enter App
                     </Button>
                 </div>
                 </div>

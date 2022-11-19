@@ -71,12 +71,12 @@ const StudentDashboard = () => {
       window.alert("Please connect wallet");
     } else {
       const MintSBTS = Moralis.Object.extend("MintSBT");
-    const query = new Moralis.Query(MintSBTS);
-    const account = user.attributes.accounts[0];
-    query.equalTo("student", account);
-    const mintSBTs = await query.find();
-    setYourSBTs(mintSBTs.length);
-    setYourTokenIds(mintSBTs.map((mintSBT) => mintSBT.attributes.tokenId));
+      const query = new Moralis.Query(MintSBTS);
+      const account = user.attributes.accounts[0];
+      query.equalTo("student", account);
+      const mintSBTs = await query.find();
+      setYourSBTs(mintSBTs.length);
+      setYourTokenIds(mintSBTs.map((mintSBT) => mintSBT.attributes.tokenId));
     }
   };
 
