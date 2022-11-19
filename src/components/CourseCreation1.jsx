@@ -127,7 +127,7 @@ const CourseCreation1 = () => {
             </div>
             <div className={stylesFirstBlock.frameDiv6}>
               <div className={stylesFirstBlock.courseNameDiv}>
-                How much will your course cost? (Specify in Matic)
+                How much will your course cost? (Specify in MATIC, MIN = 0.001 MATIC)
               </div>
               <NumberInput
                 className={stylesFirstBlock.inputOutline}

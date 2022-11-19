@@ -1,4 +1,3 @@
-// NEED TO WIRE UP LOGOUT BUTTON
 // NEED TO ADD SELECTION OUTLINE FOR PROFILE PICTURE
 
 import React, { useEffect, useState } from 'react';
@@ -15,12 +14,14 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    Box,
 } from "@chakra-ui/react";
-import moralis, { Moralis } from "moralis";
+import moralis from "moralis";
 import { useMoralis, useMoralisWeb3Api } from "react-moralis";
 import { defaultImgs } from "../images/defaultImgs";
 import { CHAIN } from "./consts/vars";
 import Logo from "../images/Logo.png";
+import ImageNotFound from "../images/imageNotFound.jpg";
 import stylesHeader from "../styles/ProfileSettings_Page/Header.module.css";
 import stylesFirstBlock from "../styles/ProfileSettings_Page/FirstBlock.module.css";
 import stylesFooter from "../styles/ProfileSettings_Page/Footer.module.css";
@@ -64,23 +65,27 @@ const ProfileSettings = () => {
     };
 
     const fetchNFTs = async () => {
-        const options = {
-            chain: CHAIN,
-            address: account,
-        };
-        await Moralis.start({ serverUrl, appId, moralisSecert });
-        const NFTs = await Web3Api.account.getNFTs(options);
-        // console.log(NFTs)
-        const images = NFTs.result.map((e) =>
-            resolveLink(JSON.parse(e.metadata)?.image)
-        );
-        // console.log(images)
-        setPfps(images);
+        try {
+            const account = user.attributes.accounts[0];
+            const options = {
+                chain: CHAIN,
+                address: account,
+            };
+            await Moralis.start({ serverUrl, appId, moralisSecert });
+            const NFTs = await Web3Api.account.getNFTs(options);
+            const images = NFTs.result.map((e) =>
+                resolveLink(JSON.parse(e.metadata)?.image)
+            );
+            setPfps(images);
+        }
+        catch (error) {
+            console.log(error);
+            return;
+        }
     };
 
     const getEducators = async () => {
         if(!user) {
-            window.alert("Please connect wallet!");
             return;
         } else {
             const Educators = Moralis.Object.extend("Educators");
@@ -161,6 +166,11 @@ const ProfileSettings = () => {
         window.location.reload();
     };
 
+    const logout = async () => {
+        await Moralis.User.logOut();
+        history.push("/welcome")
+    };
+
     return (
         <>
         {/* Header */}
@@ -229,23 +239,24 @@ const ProfileSettings = () => {
                 <div className={stylesFirstBlock.frameDiv5}>
                 <h2 className={stylesFirstBlock.titleH21}>USER PROFILE</h2>
                 <h4 className={stylesFirstBlock.nameH4}>{user?.attributes.username.slice(0, 15)}</h4>
-                <h4 className={stylesFirstBlock.editButtonH4} onClick={onUsernameOpen}>Edit Username</h4>
-                <h4 className={stylesFirstBlock.addressH4}>{`${user?.attributes.ethAddress.slice(0,4)}...${user?.attributes.ethAddress.slice(38)}`}</h4>
-                <h4 className={stylesFirstBlock.studentEducatorH4}>{educator ? "Student and Educator" : "Student" }</h4>
+                <h4 className={stylesFirstBlock.editButtonH4} onClick={onUsernameOpen}><b>Edit Username</b></h4>
+                <h4 className={stylesFirstBlock.addressH4}>{`Address: ${user?.attributes.ethAddress.slice(0,4)}...${user?.attributes.ethAddress.slice(38)}`}</h4>
+                <h4 className={stylesFirstBlock.studentEducatorH4}>Role: {educator ? "Student and Educator" : "Student" }</h4>
                 <h4 className={stylesFirstBlock.dateJoinedH4}>
                     <span className={stylesFirstBlock.dateJoinedTxt}>
-                    <b>Joined</b>
+                    <b>Joined:</b>
                     <span> {`${user?.attributes.createdAt}`}</span>
                     </span>
                 </h4>
                 </div>
-                {/* <Button
+                <Button
                 className={stylesFirstBlock.buttonSolidTextAndIcon}
                 variant="solid"
                 colorScheme="red"
+                onClick={async () => logout()}
                 >
                 Log Out
-                </Button> */}
+                </Button>
             </div>
             <div className={stylesFirstBlock.streakDiv}>
                 <h2 className={stylesFirstBlock.frameH2}>
@@ -305,26 +316,29 @@ const ProfileSettings = () => {
             />
             <ModalBody>
                 <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr 1fr",
-                }}
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr 1fr 1fr",
+                    }}
                 >
                 {pfps.map((e, i) => {
                     return (
                     <>
+                    <Box as='button'>
                         <Image
-                        src={e}
-                        alt='pfp'
-                        boxSize='100px'
-                        objectFit='cover'
-                        className={
-                            selectedPFP === e ? "pfpOptionSelected" : "pfpOption"
-                        } // Outline of selected image is not working
-                        onClick={() => {
-                            setSelectedPFP(pfps[i]);
-                        }}
+                            src={e}
+                            fallbackSrc={ImageNotFound}
+                            alt="profilePFP"
+                            boxSize="100px"
+                            borderRadius='full'
+                            className={
+                                selectedPFP === e ? "pfpOptionSelected" : "pfpOption"
+                            }
+                            onClick={() => {
+                                setSelectedPFP(pfps[i]);
+                            }}
                         />
+                    </Box>
                     </>
                     );
                 })}

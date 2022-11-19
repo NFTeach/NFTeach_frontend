@@ -66,7 +66,7 @@ const CourseCreation4 = () => {
   const [fakeQuestion10Answer1, setFakeQuestion10Answer1] = useState();
   const [fakeQuestion10Answer2, setFakeQuestion10Answer2] = useState();
   const [fakeQuestion10Answer3, setFakeQuestion10Answer3] = useState();
-  const [passingGrade, setPassingGrade] = useState();
+  const [passingGrade, setPassingGrade] = useState("7");
 
   const saveTest = async () => {
     const Courses = Moralis.Object.extend("Courses");

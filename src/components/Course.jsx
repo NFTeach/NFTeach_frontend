@@ -61,8 +61,8 @@ const Course = () => {
 
     useEffect(() => {
         getCourse();
-    }, [selectedSectionName, selectedSectionDescription, selectedSectionVideo]);
-    console.log(selectedSectionName, selectedSectionDescription, selectedSectionVideo);
+    }, []);
+    // console.log(selectedSectionName, selectedSectionDescription, selectedSectionVideo);
 
     return (
         <>

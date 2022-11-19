@@ -65,12 +65,29 @@ const Question10 = () => {
     const [pass, setPass] = useState(false);
     const [tokenId, setTokenId] = useState("");
     const [mintPrice, setMintPrice] = useState("");
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { 
+        isOpen: isPassOpen, 
+        onOpen: onPassOpen, 
+        onClose: onPassClose 
+    } = useDisclosure();
+    const {
+        isOpen: isClaimSuccessOpen,
+        onOpen: onClaimSuccessOpen,
+        onClose: onClaimSuccessClose,
+    } = useDisclosure();
 
     useEffect(() => {
         if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, isWeb3Enabled]);
+
+    useEffect(() => {
+        if (!isFetching && !isLoading && data) {
+          console.log("data", data);
+          setIsMintingInProgress(false);
+          onClaimSuccessOpen();
+        }
+    }, [isFetching, isLoading]);
 
     const getCourse = async () => {
         const Courses = Moralis.Object.extend("Courses");
@@ -86,7 +103,7 @@ const Question10 = () => {
         setPassingGrade(parseInt(course[0].get("test").passingGrade));
         setMintPrice(course[0].get("cost"));
     };
-    console.log(mintPrice);
+    // console.log(mintPrice);
 
     const getSBT = async () => {
         const SBT = Moralis.Object.extend("CreateSBT");
@@ -128,6 +145,7 @@ const Question10 = () => {
     };
 
     const validateStudent = async () => {
+        setIsMintingInProgress(true);
         let studentAccount = user.attributes.accounts[0];
 
         const studentParams = {
@@ -144,6 +162,13 @@ const Question10 = () => {
         }
         callValidateStudent();
     };
+
+    useEffect(() => {
+        if (executeContractError) {
+          setIsMintingInProgress(false);
+          window.alert("Error minting NFT. Make sure you have paid enough gas and please try again.");
+        }
+    }, [executeContractError]);
 
     const claimSBT = async () => {
         console.log("claiming SBT");
@@ -166,7 +191,6 @@ const Question10 = () => {
             },
             onSuccess: () => {
                 setIsMintingInProgress(false);
-                routeStudentDash();
             },
             onError: (error) => {
                 console.log("error", error);
@@ -304,7 +328,7 @@ const Question10 = () => {
                     colorScheme="green"
                     onClick={async () => {
                         checkPass();
-                        onOpen();
+                        onPassOpen();
                     }}
                     >
                     Submit Test
@@ -317,8 +341,8 @@ const Question10 = () => {
             <div className={stylesFooter.frameDiv}>
                 <h4 className={stylesFooter.nFTeachH4}>© 2022 NFTeach</h4>
             </div>
-            {/* Modal */}
-            <Modal isOpen={isOpen} onClose={onClose}>
+            {/* Pass Modal */}
+            <Modal isOpen={isPassOpen} onClose={onPassClose}>
             <ModalOverlay />
             <ModalContent>
             <ModalHeader>Test Results</ModalHeader>
@@ -345,10 +369,10 @@ const Question10 = () => {
                     Claim SBT
                 </Button>
                 </ModalBody>
-            ) : (
+                ) : (
                 <ModalBody>
-                Sorry, you did not pass the test with a grade of{" "}
-                {q10CorrectAnswerCount}/10!
+                Sorry, you did not pass the test with a grade of
+                {q10CorrectAnswerCount}/10! You need to get at least {passingGrade}/10.
                 <br />
                 <br />
                 <Button colorScheme='green' mr={3} onClick={routeExplore}>
@@ -356,6 +380,26 @@ const Question10 = () => {
                 </Button>
                 </ModalBody>
             )}
+            </ModalContent>
+        </Modal>
+        {/* Claim Modal */}
+        <Modal isOpen={isClaimSuccessOpen} onClose={onClaimSuccessClose}>
+            <ModalOverlay />
+            <ModalContent>
+            <ModalHeader>SBT Claim Success</ModalHeader>
+            <ModalCloseButton
+                onClick={() => {
+                refreshPage();
+                }}
+            />
+            <ModalBody>
+                You have successfully claimed your SBT! 
+                <br />
+                <br />
+                <Button colorScheme='green' mr={3} onClick={routeStudentDash}>
+                    Back to Student Dashboard
+                </Button>
+            </ModalBody>
             </ModalContent>
         </Modal>
         </>

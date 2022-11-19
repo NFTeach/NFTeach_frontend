@@ -171,7 +171,7 @@ const CourseCreation3 = () => {
                 </div>
               </div>
             </div>
-            <TableContainer>
+            <TableContainer display='block' overflowY='auto'>
               <Table  size='sm'>
                 <Thead>
                   <Tr>
@@ -297,7 +297,7 @@ const CourseCreation3 = () => {
                 left='0'
                 opacity='0'
                 aria-hidden='true'
-                accept='video/*'
+                accept='.mp4'
                 ref={inputVideoFile}
                 onChange={handleVideoUpload}
               />

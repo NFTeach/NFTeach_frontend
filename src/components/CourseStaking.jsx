@@ -1,12 +1,9 @@
-// ADD IN CONTRACT LOADING AND ERROR HANDLING
-
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
+import { Button, ModalContent, useDisclosure, Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody } from "@chakra-ui/react";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import moralis from "moralis";
 import { STAKING_ALLOWANCE } from "../components/consts/vars";
-import { STAKING_REQUIREMENT } from "../components/consts/vars";
 import { SBT_CONTRACT_ADDRESS } from "../components/consts/vars";
 import { GOVERNOR_CONTRACT_ADDRESS } from "../components/consts/vars";
 import { WMATIC_ADDRESS } from "../components/consts/vars";
@@ -22,10 +19,10 @@ moralis.serverURL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
 const CourseStaking = () => {
   const history = useHistory();
-  
   const [address, setAddress] = useState("");
-  const [isUploadInProgress, setIsUploadInProgress] = useState(false);
+  const [isNftMintInProgress, setIsNftMintInProgress] = useState(false);
   const [courseObjectId, setCourseObjectId] = useState("");
+  const [courseCost, setCourseCost] = useState("");
   const {
     Moralis,
     isAuthenticated,
@@ -34,6 +31,7 @@ const CourseStaking = () => {
     isWeb3EnableLoading,
     enableWeb3,
   } = useMoralis();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const user = moralis.User.current();
 
   const {
@@ -49,6 +47,13 @@ const CourseStaking = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
 
+  useEffect(() => {
+    if (!isFetching && !isLoading && data) {
+      console.log("data", data);
+      setIsNftMintInProgress(false);
+      onOpen();
+    }
+  }, [isFetching, isLoading]);
 
   const getCourse = async () => {
     if (!user) {
@@ -61,7 +66,9 @@ const CourseStaking = () => {
       query.equalTo("educatorAddress", account);
       query.descending("createdAt");
       const Course = await query.first();
+      // console.log(Course);
       setCourseObjectId(Course.id);
+      setCourseCost(Course.attributes.cost);
     }
   };
 
@@ -69,15 +76,27 @@ const CourseStaking = () => {
     getCourse();
   }, [user]);
 
+  useEffect(() => {
+    if (executeContractError) {
+      setIsNftMintInProgress(false);
+      window.alert("Error minting NFT. Make sure you have paid enough gas and please try again.");
+    }
+  }, [executeContractError]);
+
   const approveERC20 = async () => {
-    const contract = new web3.eth.Contract(
-      NFTEACH_ERC20_CONTRACT_ABI,
-      WMATIC_ADDRESS
-    );
-    const approve = await contract.methods
+    try {
+      const contract = new web3.eth.Contract(
+        NFTEACH_ERC20_CONTRACT_ABI,
+        WMATIC_ADDRESS
+      );
+      const approve = await contract.methods
       .approve(GOVERNOR_CONTRACT_ADDRESS, Moralis.Units.ETH(STAKING_ALLOWANCE))
       .send({ from: address });
-    console.log("approve", approve);
+      createSBTandStake();
+    } catch (error) {
+      setIsNftMintInProgress(false);
+      window.alert("Error approving wMATIC tx. Make sure you have paid enough gas and please try again.");
+    }
   };
 
   const createSBTandStake = async () => {
@@ -87,13 +106,12 @@ const CourseStaking = () => {
         contractAddress: SBT_CONTRACT_ADDRESS,
         functionName: "createSBT",
         params: {
-          _price: Moralis.Units.ETH(STAKING_REQUIREMENT),
+          _price: Moralis.Units.ETH(courseCost),
           _courseObjectId: courseObjectId,
         },
       },
       onSuccess: () => {
-        setIsUploadInProgress(false);
-        routeEduDash();
+        setIsNftMintInProgress(false);
       },
       onError: (error) => {
         console.log(error);
@@ -103,6 +121,10 @@ const CourseStaking = () => {
 
   const routeEduDash = () => {
     history.push("/EducatorDashboard");
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   return (
@@ -123,7 +145,7 @@ const CourseStaking = () => {
                 <span>
                   
                   To prevent <a href="https://academy.binance.com/en/articles/sybil-attacks-explained" target="_blank" rel="noreferrer"><b>Sybil Attacks </b></a> 
-                  from bad actors, we require educators to stake some funds <br /> (0.001 wMATIC). Once our platform has confirmed the stake, your course
+                  from bad actors, we require educators to stake some funds <br /> (0.0001 wMATIC). Once our platform has confirmed the stake, your course
                   will be uploaded <br /> within 24 hours. If you do not have wMATIC, you can vist:
                   <a href="https://uniswap.org/" target="_blank" rel="noreferrer"> <b>Uniswap.</b></a> 
                 </span>
@@ -134,14 +156,13 @@ const CourseStaking = () => {
             className={stylesFirstBlock.registerButton}
             variant='solid'
             colorScheme='green'
-            isLoading={isUploadInProgress}
+            isLoading={isNftMintInProgress}
             onClick={async () => {
-              setIsUploadInProgress(true);
+              setIsNftMintInProgress(true);
               await approveERC20();
-              await createSBTandStake();
             }}
           >
-            Complete Course
+            Stake and Complete Course
           </Button>
         </div>
       </div>
@@ -149,6 +170,33 @@ const CourseStaking = () => {
       <div className={stylesFooter.frameDiv}>
         <h4 className={stylesFooter.nFTeachH4}>© 2022 NFTeach</h4>
       </div>
+      {/* Modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Course Created</ModalHeader>
+          <ModalCloseButton
+            onClick={() => {
+            refreshPage();
+            }}
+          />
+          <ModalBody>
+            <p>
+              Your course has been created!! It will be added to the <b>Explore page</b> soon after our team has reviewed it.
+            </p>
+            <br/>
+            <Button
+                colorScheme='green'
+                mr={3}
+                onClick={async () => {
+                  routeEduDash();
+                }}
+            >
+              Go to Educator Dashboard
+            </Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   )
 }

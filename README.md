@@ -7,13 +7,12 @@ Welcome to NFTeach. This is an education platform where educators can upload edu
 📄 Clone:
 
 ```sh
-git clone https://github.com/NFTeach/NFTeach.git
+git clone https://github.com/NFTeach/NFTeach_frontend.git
 ```
 
 💿 Install:
 
 ```sh
-cd NFTEACH_FRONTEND
 npm install
 ```
 

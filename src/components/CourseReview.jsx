@@ -243,6 +243,7 @@ const CourseReview = () => {
           const account = user.attributes.accounts[0];
           query.equalTo("educatorAddress", account);
           query.descending("createdAt");
+          query.notEqualTo("courseName", courseName);
           const coursePrerequisites = await query.find();
           setCoursePrerequisites(coursePrerequisites);
         }
@@ -412,7 +413,7 @@ const CourseReview = () => {
     
         await Course.save();
         setIsSavingInProgress(false);
-        console.log("Test saved");
+        refreshPage();
     };
 
     const handleImageUpload = (e) => {
