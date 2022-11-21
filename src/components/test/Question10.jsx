@@ -1,5 +1,3 @@
-// ADD IN CONTRACT LOADING AND ERROR HANDLING
-
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import moralis from "moralis";
@@ -17,9 +15,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  Image
 } from "@chakra-ui/react";
 import { SBT_CONTRACT_ADDRESS } from "../../components/consts/vars";
 import { NFTEACH_SBT_CONTRACT_ABI } from "../../components/consts/contractABIs";
+import axios from 'axios';
 import Logo from "../../images/Logo.png";
 import stylesHeader from "../../styles/Test_Page/Header.module.css";
 import stylesFirstBlock from "../../styles/Test_Page/FirstBlock.module.css";
@@ -49,6 +49,7 @@ const Question10 = () => {
     } = useWeb3ExecuteFunction();
     const user = moralis.User.current();
     const [courseName, setCourseName] = useState();
+    const [courseEducatorAddress, setCourseEducatorAddress] = useState(""); 
     const [question10, setQuestion10] = useState("");
     const [question10Answer, setQuestion10Answer] = useState("");
     const [fakeQuestion10Answer1, setFakeQuestion10Answer1] = useState("");
@@ -65,6 +66,7 @@ const Question10 = () => {
     const [pass, setPass] = useState(false);
     const [tokenId, setTokenId] = useState("");
     const [mintPrice, setMintPrice] = useState("");
+    const [certIpfsUrl, setCertIpfsUrl] = useState("");
     const { 
         isOpen: isPassOpen, 
         onOpen: onPassOpen, 
@@ -87,7 +89,7 @@ const Question10 = () => {
           setIsMintingInProgress(false);
           onClaimSuccessOpen();
         }
-    }, [isFetching, isLoading]);
+    }, [isFetching, isLoading, data, onClaimSuccessOpen]);
 
     const getCourse = async () => {
         const Courses = Moralis.Object.extend("Courses");
@@ -95,6 +97,7 @@ const Question10 = () => {
         query.equalTo("objectId", courseObjectId);
         const course = await query.find();
         setCourseName(course[0].get("courseName"));
+        setCourseEducatorAddress(course[0].get("educatorAddress"));
         setQuestion10(course[0].get("test").question10);
         setQuestion10Answer(course[0].get("test").question10Answer);
         setFakeQuestion10Answer1(course[0].get("test").fakeQuestion10Answer1);
@@ -146,6 +149,7 @@ const Question10 = () => {
 
     const validateStudent = async () => {
         setIsMintingInProgress(true);
+        
         let studentAccount = user.attributes.accounts[0];
 
         const studentParams = {
@@ -160,7 +164,8 @@ const Question10 = () => {
         );
         console.log(_Result);
         }
-        callValidateStudent();
+        await callValidateStudent();
+        generateCert();
     };
 
     useEffect(() => {
@@ -170,32 +175,81 @@ const Question10 = () => {
         }
     }, [executeContractError]);
 
-    const claimSBT = async () => {
+    const userName = user?.attributes.username;
+    const d = new Date();
+    const generateCert = async () => {
+        const apiUrl = 'https://api.make.cm/make/t/59a51fef-1f6a-4ec5-a67a-cb759bcdb5ee/sync';
+        let imgURL;
+        let imgObject;
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-MAKE-API-KEY': '580f69f01c4a83985258d5e03362709391eb9eaf'
+        };
+        const data = {
+            "format": "jpg",
+            "customSize": {
+            "width": "650",
+            "unit": "px",
+            "height": "650"
+            },
+            "data": {
+            "name": userName,
+            "date": d,
+            "educatorAddress": courseEducatorAddress.slice(0, 6) + "..." + courseEducatorAddress.slice(38),
+            "course": courseName
+            } 
+        };
+        axios.post(apiUrl, data, {
+            headers: headers
+        })
+        .then(async (response) => {
+            // console.log(response);
+            imgURL = response.data.resultUrl;
+            imgObject = await fetch(imgURL);
+            // console.log(imgObject);
+            const blob = await imgObject.blob();
+            // console.log(blob);
+            const file = new File([blob], "cert.jpg", {type: "image/jpeg"});
+            // console.log(file);
+            const imageFile = new Moralis.File("cert.jpg", file);
+            // console.log(imageFile);
+            await imageFile.saveIPFS();
+            console.log(imageFile.ipfs());
+            setCertIpfsUrl(imageFile.ipfs());
+            claimSBT(imageFile.ipfs());
+        }, (error) => {
+            console.log(error);
+        });
+    };
+
+    const claimSBT = async (cert) => {
         console.log("claiming SBT");
         const ValidateTests = Moralis.Object.extend("ValidateTest");
         const query = new Moralis.Query(ValidateTests);
         query.equalTo("student", user.attributes.accounts[0]);
         query.equalTo("tokenId_decimal", tokenId);
         const validateTestComplete = await query.find();
-    
+
         if (validateTestComplete) {
-          executeContractFunction({
-            params: {
-                abi: NFTEACH_SBT_CONTRACT_ABI,
-                contractAddress: SBT_CONTRACT_ADDRESS,
-                functionName: "mintSBT",
+            executeContractFunction({
                 params: {
-                    _tokenId: tokenId,
+                    abi: NFTEACH_SBT_CONTRACT_ABI,
+                    contractAddress: SBT_CONTRACT_ADDRESS,
+                    functionName: "mintSBT",
+                    params: {
+                        _tokenId: tokenId,
+                        certificate: cert,
+                    },
+                    msgValue: Moralis.Units.ETH(mintPrice)
                 },
-                msgValue: Moralis.Units.ETH(mintPrice)
-            },
-            onSuccess: () => {
-                setIsMintingInProgress(false);
-            },
-            onError: (error) => {
-                console.log("error", error);
-            },
-          });
+                onSuccess: () => {
+                    setIsMintingInProgress(false);
+                },
+                onError: (error) => {
+                    console.log("error", error);
+                },
+            });
         } else {
             console.log("Student not validated to mint SBT!");
         }
@@ -363,7 +417,6 @@ const Question10 = () => {
                     isLoading={isMintingInProgress}
                     onClick={async () => {
                         await validateStudent();
-                        setTimeout(claimSBT, 1000);
                     }}
                 >
                     Claim SBT
@@ -395,6 +448,7 @@ const Question10 = () => {
             <ModalBody>
                 You have successfully claimed your SBT! 
                 <br />
+                <Image boxSize='400px' src={certIpfsUrl} alt='cert' />
                 <br />
                 <Button colorScheme='green' mr={3} onClick={routeStudentDash}>
                     Back to Student Dashboard

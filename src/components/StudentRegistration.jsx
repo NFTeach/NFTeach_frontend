@@ -58,6 +58,7 @@ const StudentRegistration = () => {
             const User = Moralis.Object.extend("_User");
             const query = new Moralis.Query(User);
             const myDetails = await query.first();
+            console.log(myDetails);
 
             if (username) {
                 myDetails?.set("username", username);

@@ -27,6 +27,7 @@ const CourseCreation2 = () => {
   const inputImageFile = useRef(null);
   const [uploadedImageFile, setUploadedImageFile] = useState(null);
   const [isUploadInProgress, setIsUploadInProgress] = useState(false);
+  console.log(uploadedImageFile);
 
   const saveImage = async () => {
     let img;
@@ -34,6 +35,7 @@ const CourseCreation2 = () => {
     if (uploadedImageFile) {
       const image = uploadedImageFile;
       const imageFile = new Moralis.File(image.name, image);
+      console.log(imageFile);
       await imageFile.saveIPFS();
       img = imageFile.ipfs();
       imgObject = { img };
