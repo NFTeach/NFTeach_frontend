@@ -45,6 +45,7 @@ const EducatorDashboard = () => {
   const [courseIds, setCourseIds] = useState([]);
   const [userEnrolledCourses, setUserEnrolledCourses] = useState([]);
   const [numberOfStudentsEnrolled, setNumberOfStudentsEnrolled] = useState([]);
+  const [isNumberOfStudentsEnrolledLoading, setIsNumberOfStudentsEnrolledLoading] = useState(false);
   const [pfp, setPfp] = useState();
   const [isWithdrawingInProgress, setIsWithdrawingInProgress] = useState(false);
   const user = moralis.User.current();
@@ -163,12 +164,20 @@ const EducatorDashboard = () => {
       }) 
     }
   };
-  console.log(userEnrolledCourses);
+  // console.log(userEnrolledCourses);
 
   const getNumberOfStudentsEnrolled = async () => {
+    setIsNumberOfStudentsEnrolledLoading(true);
     if (user) {
       for (let i = 0; i < userEnrolledCourses.length; i++) {
-        setNumberOfStudentsEnrolled(_.intersectionWith(userEnrolledCourses[i], courseIds, _.isEqual).length);
+        try {
+          setNumberOfStudentsEnrolled(_.intersectionWith(userEnrolledCourses[i], courseIds, _.isEqual).length);
+          setIsNumberOfStudentsEnrolledLoading(false);
+        } catch (error) {
+          console.log(error);
+          setIsNumberOfStudentsEnrolledLoading(false);
+        }
+        
       }
     }
   };
@@ -178,7 +187,6 @@ const EducatorDashboard = () => {
     if(!user) return null;
     getEducatorCourses();
     getEnrolledCourses();
-    getNumberOfStudentsEnrolled();
     setPfp(user.get("pfp"));
   }, [user]);
 
@@ -288,7 +296,18 @@ const EducatorDashboard = () => {
             </div>
             <div className={stylesFirstBlock.frameDiv2}>
               <h3 className={stylesFirstBlock.sBTsIssuedH3}>
-                Enrolled Students 
+                Enrolled Students
+                <Button
+                  className={stylesFirstBlock.buttonSolidTextAndIcon}
+                  variant='solid'
+                  colorScheme='green'
+                  onClick={() => {
+                    getNumberOfStudentsEnrolled();
+                  }}
+                  isLoading={isNumberOfStudentsEnrolledLoading}
+                >
+                  Fetch Data 
+                </Button> 
               </h3>
               <b className={stylesFirstBlock.b}>{numberOfStudentsEnrolled}</b>
             </div>
