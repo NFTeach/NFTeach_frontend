@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { Button, ModalContent, useDisclosure, Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody } from "@chakra-ui/react";
+import { Button, ModalContent, useDisclosure, Modal, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, Image } from "@chakra-ui/react";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import moralis from "moralis";
 import { STAKING_ALLOWANCE } from "../components/consts/vars";
@@ -22,6 +22,8 @@ const CourseStaking = () => {
   const [address, setAddress] = useState("");
   const [isNftMintInProgress, setIsNftMintInProgress] = useState(false);
   const [courseObjectId, setCourseObjectId] = useState("");
+  const [courseName, setCourseName] = useState("");
+  const [courseImage, setCourseImage] = useState("");
   const [courseCost, setCourseCost] = useState("");
   const {
     Moralis,
@@ -69,6 +71,8 @@ const CourseStaking = () => {
       // console.log(Course);
       setCourseObjectId(Course.id);
       setCourseCost(Course.attributes.cost);
+      setCourseName(Course.attributes.courseName);
+      setCourseImage(Course.attributes.imageFile);
     }
   };
 
@@ -142,13 +146,10 @@ const CourseStaking = () => {
             </div>
             <div className={stylesFirstBlock.titleDiv1}>
               <span className={stylesFirstBlock.titleTxtSpan}>
-                <span>
-                  
                   To prevent <a href="https://academy.binance.com/en/articles/sybil-attacks-explained" target="_blank" rel="noreferrer"><b>Sybil Attacks </b></a> 
                   from bad actors, we require educators to stake some funds <br /> (0.0001 wMATIC). Once our platform has confirmed the stake, your course
                   will be uploaded <br /> within 24 hours. If you do not have wMATIC, you can vist:
                   <a href="https://uniswap.org/" target="_blank" rel="noreferrer"> <b>Uniswap.</b></a> 
-                </span>
               </span>
             </div>
           </div>
@@ -182,9 +183,16 @@ const CourseStaking = () => {
           />
           <ModalBody>
             <p>
-              Your course has been created!! It will be added to the <b>Explore page</b> soon after our team has reviewed it.
+              Your course (<b>{courseName}</b>) has been created!! It will be added to the Explore page soon after our team has reviewed it.
             </p>
             <br/>
+            <Image 
+              src={courseImage.img} 
+              alt="Course Image"
+              boxSize='250px'
+              align={'center'}
+            />
+            <br />
             <Button
                 colorScheme='green'
                 mr={3}

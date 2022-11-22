@@ -97,7 +97,7 @@ const CourseCreation2 = () => {
         <div className={stylesFirstBlock.frameDiv}>
           <div className={stylesFirstBlock.frameDiv1}>
             <div className={stylesFirstBlock.titleDiv}>
-              Create your course (2/4)
+              Add your course image (2/4)
             </div>
           </div>
           <div className={stylesFirstBlock.frameDiv2}>

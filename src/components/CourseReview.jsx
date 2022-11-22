@@ -1,5 +1,3 @@
-// NEED TO ADD RESTRICTION TO NOT ALLOW SELECTION OF SAME COURSE AS PRE REQ
-
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Input,

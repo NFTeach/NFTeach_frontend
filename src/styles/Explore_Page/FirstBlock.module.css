@@ -27,16 +27,15 @@
   font-size: 55px;
 }
 .frameDiv3 {
-  align-self: stretch;
   display: flex;
   flex-direction: column;
-  padding: 0 0 60px;
+  padding: 0 0 80px;
   box-sizing: border-box;
   align-items: flex-start;
   justify-content: flex-start;
   font-size: 20px;
   overflow-y: auto;
-  overflow-x: auto;
+  /* overflow-x: auto; */
 }
 .chooseACourseBelowToStart {
   margin: 0;

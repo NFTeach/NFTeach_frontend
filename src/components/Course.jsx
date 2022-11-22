@@ -1,12 +1,17 @@
-// ADD BUTTON TO GO BACK TO EXPLORE PAGE
-// NEED TO REDESIGN THE LOOK OF THIS PAGE (TALK WITH AYUSH)
-// CODE DOESN'T CHANGE WHEN YOU CHANGE THE SECTION (FIX THIS)
+// NEED TO REDESIGN UI (FUTURE TASK)
 
 import React, { useState, useEffect } from 'react';
 import {
-    Button,
     Select,
     Textarea,
+    Button,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalCloseButton,
 } from "@chakra-ui/react";
 import { useLocation, Link } from 'react-router-dom';
 import moralis from "moralis";
@@ -28,6 +33,7 @@ const Course = () => {
     const [selectedSectionDescription, setSelectedSectionDescription] = useState();
     const [selectedSectionVideo, setSelectedSectionVideo] = useState();
     const location = useLocation();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const { courseObjectId } = location.state;
 
     const getCourse = async () => {
@@ -56,12 +62,21 @@ const Course = () => {
             setSelectedSectionName(courseSection3?.sectionName);
             setSelectedSectionDescription(courseSection3?.sectionDescription);
             setSelectedSectionVideo(courseSection3?.vid);
+        } else if (e === "Test") {
+            setSelectedSectionName("Test");
+            setSelectedSectionDescription("");
+            setSelectedSectionVideo("");
+            onOpen();
         }
     };
 
     useEffect(() => {
         getCourse();
     }, []);
+
+    const refreshPage = () => {
+        window.location.reload();
+    };
     // console.log(selectedSectionName, selectedSectionDescription, selectedSectionVideo);
 
     return (
@@ -78,6 +93,7 @@ const Course = () => {
                         <option value="1">{courseSection1?.sectionName}</option>
                         <option value="2">{courseSection2?.sectionName}</option>
                         <option value="3">{courseSection3?.sectionName}</option>
+                        <option value="Test">Test</option>
                     </Select>
                     <video className={stylesFirstBlock.frameVideo} src={selectedSectionVideo} controls>
                     <source />
@@ -94,22 +110,37 @@ const Course = () => {
                     </div>
                     </div>
                 </div>
-                <Link
-                    to={{
-                        pathname: "/question1",
-                        state: {courseObjectId},
-                    }}
-                >
-                    <Button variant="solid" w="272px" colorScheme="green">
-                        Attempt Test
-                    </Button>
-                </Link>
                 </div>
             </div>
             {/* Footer */}
             <div className={stylesFooter.frameDiv}>
                 <h4 className={stylesFooter.nFTeachH4}>© 2022 NFTeach</h4>
             </div>
+            {/* Test Modal */}
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Test</ModalHeader>
+                    <ModalCloseButton
+                    onClick={() => {
+                        refreshPage();
+                    }}
+                    />
+                    <ModalBody>
+                    <p>Are you ready to take the test?</p>
+                    <Link
+                        to={{
+                            pathname: "/question1",
+                            state: {courseObjectId},
+                        }}
+                    >
+                    <Button variant="solid" w="272px" colorScheme="green">
+                        Attempt Test
+                    </Button>
+                    </Link>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
         </>
     )
 }

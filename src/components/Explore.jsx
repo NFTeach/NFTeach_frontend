@@ -1,3 +1,7 @@
+// FIGURE OUT COURSE PREREQ ISSUE WITHIN SEARCH BAR 
+// (I THINK I NEED TO ALTER SMART CONTRACT TO ADD COURSE OBJECT TO MINTSBT FUNCTION)
+// TALK TO OLIVIER TMRW ABOUT THIS
+
 import React, { useEffect, useState } from 'react';
 import moralis from "moralis";
 import { useMoralis } from "react-moralis";
@@ -18,6 +22,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import * as _ from 'lodash';
 import Logo from "../images/Logo.png";
 import stylesHeader from "../styles/Explore_Page/Header.module.css";
 import stylesFirstBlock from "../styles/Explore_Page/FirstBlock.module.css";
@@ -37,7 +42,7 @@ const Explore = () => {
   const [images, setImages] = useState([]);
   const [courseName, setCourseName] = useState([]);
   const [courseDescription, setCourseDescription] = useState([]);
-  const [courseprerequisite, setCoursePrerequisite] = useState([]);
+  const [coursePrerequisite, setCoursePrerequisite] = useState([]);
   const [prerequisitePass, setPrerequisitePass] = useState(false);
   const [userSBTs, setUserSBTs] = useState([]);
   const [userTokenIds, setUserTokenIds] = useState("");
@@ -81,34 +86,35 @@ const Explore = () => {
     setUserSBTs(mintSBT);
     setUserTokenIds((mintSBT).map((mintSBT) => mintSBT.get("tokenId")));
   };
-  console.log(userTokenIds);
+  // console.log(userSBTs)
+  // console.log(userTokenIds);
+  // console.log(coursePrerequisite);
 
   const checkPrerequisite = async (id) => {
-    const createSBTs = Moralis.Object.extend("CreateSBT");
-    const query = new Moralis.Query(createSBTs);
-    query.equalTo("courseObjectId", id);
-    const createSBT = await query.find();
-    console.log("createSBT", createSBT);
-    const index = createSBT[0].get("tokenId");
-    setChosenIndex(index);
-    const courseSBT = createSBT.map((createSBT) => createSBT.get("tokenId"));
-    const prerequisiteSBT = userSBTs.filter((userSBT) => courseSBT.includes(userSBT.get("tokenId")));
+    // setChosenIndex(index);
+    // const createSBTs = Moralis.Object.extend("CreateSBT");
+    // const query = new Moralis.Query(createSBTs);
+    // query.equalTo("courseObjectId", courseprerequisite[index]);
+    // const createSBT = await query.find();
+    // const courseSBT = createSBT.map((createSBT) => createSBT.get("tokenId"));
+    // const prerequisiteSBT = userSBTs.filter((userSBT) => courseSBT.includes(userSBT.get("tokenId")));
 
-    if (courseprerequisite[index] === undefined) {
-      setPrerequisitePass(true);
-    } else if (prerequisiteSBT.length === 0) {
-      setPrerequisitePass(false);
-    } else {
-      setPrerequisitePass(true);
-    }
+    // if (courseprerequisite[index] === undefined) {
+    //   setPrerequisitePass(true);
+    // } else if (prerequisiteSBT.length === 0) {
+    //   setPrerequisitePass(false);
+    // } else {
+    //   setPrerequisitePass(true);
+    // }
 
-    const Courses = Moralis.Object.extend("Courses");
-    const query2 = new Moralis.Query(Courses);
-    query2.equalTo("objectId", courseprerequisite[index]);
-    const course = await query2.find();
-    setCoursePrereq(course[0]?.get("courseName"));
+    // const Courses = Moralis.Object.extend("Courses");
+    // const query2 = new Moralis.Query(Courses);
+    // query2.equalTo("objectId", courseprerequisite[index]);
+    // const course = await query2.find();
+    // setCoursePrereq(course[0]?.get("courseName"));
 
-    onOpen();
+    // onOpen();
+    window.alert("this broken :(")
   }
 
   const handleEnroll = async () => {
@@ -250,10 +256,10 @@ const Explore = () => {
                 }}
                 >
                 {filteredCourses?.map((course, index) => (
-                  <Box key={index} w='225px' h='225px'>
+                  <Box key={index} w='215px' h='215px'>
                     <Image
                       borderRadius='full'
-                      boxSize='225px'
+                      boxSize='215px'
                       src={course.attributes.imageFile.img}
                       alt={course.attributes.courseName}
                       onClick={async () => {

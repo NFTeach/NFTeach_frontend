@@ -14,10 +14,10 @@
 }
 .titleTxtSpan {
   line-break: anywhere;
+
 }
 .frameDiv1,
 .titleDiv1 {
-  align-self: stretch;
   flex-shrink: 0;
   align-items: center;
 }
