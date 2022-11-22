@@ -4,11 +4,11 @@ import { useMoralis } from "react-moralis";
 import { useHistory, Link } from "react-router-dom";
 import { defaultImgs } from "../images/defaultImgs";
 import {
-  HStack,
   Box,
   Image,
   Text,
   Button,
+  Input,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -43,6 +43,7 @@ const Explore = () => {
   const [userTokenIds, setUserTokenIds] = useState("");
   const [chosenIndex, setChosenIndex] = useState();
   const [coursePrereq, setCoursePrereq] = useState();
+  const [searchInput, setSearchInput] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = moralis.User.current();
 
@@ -80,13 +81,16 @@ const Explore = () => {
     setUserSBTs(mintSBT);
     setUserTokenIds((mintSBT).map((mintSBT) => mintSBT.get("tokenId")));
   };
+  console.log(userTokenIds);
 
-  const checkPrerequisite = async (index) => {
-    setChosenIndex(index);
+  const checkPrerequisite = async (id) => {
     const createSBTs = Moralis.Object.extend("CreateSBT");
     const query = new Moralis.Query(createSBTs);
-    query.equalTo("courseObjectId", courseprerequisite[index]);
+    query.equalTo("courseObjectId", id);
     const createSBT = await query.find();
+    console.log("createSBT", createSBT);
+    const index = createSBT[0].get("tokenId");
+    setChosenIndex(index);
     const courseSBT = createSBT.map((createSBT) => createSBT.get("tokenId"));
     const prerequisiteSBT = userSBTs.filter((userSBT) => courseSBT.includes(userSBT.get("tokenId")));
 
@@ -128,9 +132,26 @@ const Explore = () => {
     if (!user) return null;
     setPfp(user.get("pfp"));
     getEducator();
-    getCourses();
     getUserSBTs();
   }, [user]);
+
+  useEffect(() => {
+    if (!user) return null;
+    getCourses();
+  }, []);
+
+  let inputHandler = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setSearchInput(lowerCase);
+  };
+
+  const filteredCourses = courses.filter((course) => {
+    if (searchInput === "") {
+      return course;
+    } else {
+      return course.get("courseName").toLowerCase().includes(searchInput.toLowerCase());
+    }
+  });
 
   const routeStudentDashboard = () => {
     history.push("/studentDashboard");
@@ -200,46 +221,53 @@ const Explore = () => {
       <div className={stylesFirstBlock.explorePageDiv}>
         <div className={stylesFirstBlock.frameDiv}>
           <div className={stylesFirstBlock.frameDiv1}>
-            <img
-              className={stylesFirstBlock.imageIcon}
-              alt=''
-              src={spaceMan}
-            />
+            <img className={stylesFirstBlock.imageIcon} alt="" src={spaceMan} />
             <div className={stylesFirstBlock.frameDiv2}>
               <div className={stylesFirstBlock.frameDiv3}>
-                <h1
-                  className={stylesFirstBlock.educationThatsH1}
-                >{`Education That’s `}</h1>
-                <h1 className={stylesFirstBlock.outOfThisWorld}>
-                  Out Of This World
-                </h1>
+                <h1 className={stylesFirstBlock.educationThatsH1}>{`Education That’s `}</h1>
+                <h1 className={stylesFirstBlock.outOfThisWorld}>Out Of This World</h1>
               </div>
               <h3 className={stylesFirstBlock.chooseACourseBelowToStart}>
-                Choose a course below to start learning
+                Choose a course below to start learning and earning
               </h3>
             </div>
           </div>
+          <Input
+            className={stylesFirstBlock.inputOutline}
+            variant="outline"
+            width="919px"
+            placeholder="Search Courses"
+            w="919px"
+            onChange={inputHandler}
+            value={searchInput}
+          />
           <div className={stylesFirstBlock.frameDiv3} >
-            <HStack spacing='100px'>
-              {courses?.map((e, index) => (
-                <Box key={index} w='250px' h='250px'>
-                  <Image
-                    borderRadius='full'
-                    boxSize='250px'
-                    src={images[index]?.img}
-                    alt={courseName?.[index]}
-                    onClick={async () => {
-                      await checkPrerequisite(index);
-                    }}
-                  />
-                  <br />
-                  <Text>{courseName?.[index]}</Text>
-                </Box>
-              ))}
-            </HStack>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+                  gridGap: "100px",
+                }}
+                >
+                {filteredCourses?.map((course, index) => (
+                  <Box key={index} w='225px' h='225px'>
+                    <Image
+                      borderRadius='full'
+                      boxSize='225px'
+                      src={course.attributes.imageFile.img}
+                      alt={course.attributes.courseName}
+                      onClick={async () => {
+                        await checkPrerequisite(course.id);
+                      }}
+                    />
+                    <br />
+                    <Text>{course.attributes.courseName}</Text>
+                  </Box>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       {/* Footer Block */}
       <div className={stylesFooter.frameDiv}>
         <h4 className={stylesFooter.nFTeachH4}>© 2022 NFTeach</h4>
