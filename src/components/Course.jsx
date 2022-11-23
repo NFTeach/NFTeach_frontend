@@ -1,5 +1,3 @@
-// NEED TO REDESIGN UI (FUTURE TASK)
-
 import React, { useState, useEffect } from 'react';
 import {
     Select,
@@ -128,6 +126,7 @@ const Course = () => {
                     />
                     <ModalBody>
                     <p>Are you ready to take the test?</p>
+                    <br />
                     <Link
                         to={{
                             pathname: "/question1",

@@ -49,7 +49,7 @@ const Question10 = () => {
     } = useWeb3ExecuteFunction();
     const user = moralis.User.current();
     const [courseName, setCourseName] = useState();
-    const [courseEducatorAddress, setCourseEducatorAddress] = useState(""); 
+    const [courseEducatorAddress, setCourseEducatorAddress] = useState("");
     const [question10, setQuestion10] = useState("");
     const [question10Answer, setQuestion10Answer] = useState("");
     const [fakeQuestion10Answer1, setFakeQuestion10Answer1] = useState("");
@@ -98,6 +98,7 @@ const Question10 = () => {
         const course = await query.find();
         setCourseName(course[0].get("courseName"));
         setCourseEducatorAddress(course[0].get("educatorAddress"));
+
         setQuestion10(course[0].get("test").question10);
         setQuestion10Answer(course[0].get("test").question10Answer);
         setFakeQuestion10Answer1(course[0].get("test").fakeQuestion10Answer1);
@@ -106,7 +107,7 @@ const Question10 = () => {
         setPassingGrade(parseInt(course[0].get("test").passingGrade));
         setMintPrice(course[0].get("cost"));
     };
-    // console.log(mintPrice);
+    console.log(courseObjectId);
 
     const getSBT = async () => {
         const SBT = Moralis.Object.extend("CreateSBT");
@@ -240,6 +241,7 @@ const Question10 = () => {
                     params: {
                         _tokenId: tokenId,
                         certificate: cert,
+                        _courseObjectId: courseObjectId,
                     },
                     msgValue: Moralis.Units.ETH(mintPrice)
                 },
@@ -446,7 +448,8 @@ const Question10 = () => {
                 }}
             />
             <ModalBody>
-                You have successfully claimed your SBT! 
+                You have successfully claimed your SBT! Click this link to join the NFTeach SBT holders exclusive Discord server: 
+                <a href="https://discord.gg/PV2Pga3q" target="_blank" rel="noreferrer"><b>Discord Link</b></a>
                 <br />
                 <Image boxSize='400px' src={certIpfsUrl} alt='cert' />
                 <br />

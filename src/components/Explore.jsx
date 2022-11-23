@@ -1,7 +1,3 @@
-// FIGURE OUT COURSE PREREQ ISSUE WITHIN SEARCH BAR 
-// (I THINK I NEED TO ALTER SMART CONTRACT TO ADD COURSE OBJECT TO MINTSBT FUNCTION)
-// TALK TO OLIVIER TMRW ABOUT THIS
-
 import React, { useEffect, useState } from 'react';
 import moralis from "moralis";
 import { useMoralis } from "react-moralis";
@@ -22,7 +18,6 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import * as _ from 'lodash';
 import Logo from "../images/Logo.png";
 import stylesHeader from "../styles/Explore_Page/Header.module.css";
 import stylesFirstBlock from "../styles/Explore_Page/FirstBlock.module.css";
@@ -42,10 +37,10 @@ const Explore = () => {
   const [images, setImages] = useState([]);
   const [courseName, setCourseName] = useState([]);
   const [courseDescription, setCourseDescription] = useState([]);
-  const [coursePrerequisite, setCoursePrerequisite] = useState([]);
   const [prerequisitePass, setPrerequisitePass] = useState(false);
   const [userSBTs, setUserSBTs] = useState([]);
   const [userTokenIds, setUserTokenIds] = useState("");
+  const [userSbtCourseObjectIds, setUserSbtCourseObjectIds] = useState([]);
   const [chosenIndex, setChosenIndex] = useState();
   const [coursePrereq, setCoursePrereq] = useState();
   const [searchInput, setSearchInput] = useState("");
@@ -73,7 +68,6 @@ const Explore = () => {
       setImages(course.map((course) => course.get("imageFile")));
       setCourseName(course.map((course) => course.get("courseName")));
       setCourseDescription(course.map((course) => course.get("description")));
-      setCoursePrerequisite(course.map((course) => course.get("prerequisite")));
     }
   };
 
@@ -85,36 +79,46 @@ const Explore = () => {
     const mintSBT = await query.find();
     setUserSBTs(mintSBT);
     setUserTokenIds((mintSBT).map((mintSBT) => mintSBT.get("tokenId")));
+    setUserSbtCourseObjectIds((mintSBT).map((mintSBT) => mintSBT.get("courseObjectId")));
   };
   // console.log(userSBTs)
-  // console.log(userTokenIds);
+  // console.log(userSbtCourseObjectIds);
   // console.log(coursePrerequisite);
 
   const checkPrerequisite = async (id) => {
-    // setChosenIndex(index);
-    // const createSBTs = Moralis.Object.extend("CreateSBT");
-    // const query = new Moralis.Query(createSBTs);
-    // query.equalTo("courseObjectId", courseprerequisite[index]);
-    // const createSBT = await query.find();
-    // const courseSBT = createSBT.map((createSBT) => createSBT.get("tokenId"));
-    // const prerequisiteSBT = userSBTs.filter((userSBT) => courseSBT.includes(userSBT.get("tokenId")));
+    // console.log(id);
+    const CoursePrereq = Moralis.Object.extend("Courses");
+    const query = new Moralis.Query(CoursePrereq);
+    query.equalTo("objectId", id);
+    const coursePrereq = await query.find();
+    const coursePreReq = coursePrereq[0].get("prerequisite");
+    // console.log(coursePreReq);
+    const userSbtPass = userSbtCourseObjectIds.includes(coursePrereq[0].get("prerequisite"));
+    // console.log(userSbtPass);
+    // console.log(coursePrereq[0].get("prerequisite"));
 
-    // if (courseprerequisite[index] === undefined) {
-    //   setPrerequisitePass(true);
-    // } else if (prerequisiteSBT.length === 0) {
-    //   setPrerequisitePass(false);
-    // } else {
-    //   setPrerequisitePass(true);
-    // }
+    if(coursePreReq === undefined) {
+      setPrerequisitePass(true);
+    } else if (userSbtPass === true) {
+      setPrerequisitePass(true);
+    } else {
+      setPrerequisitePass(false);
+    }
 
-    // const Courses = Moralis.Object.extend("Courses");
-    // const query2 = new Moralis.Query(Courses);
-    // query2.equalTo("objectId", courseprerequisite[index]);
-    // const course = await query2.find();
-    // setCoursePrereq(course[0]?.get("courseName"));
+    const CourseTokenId = Moralis.Object.extend("CreateSBT");
+    const query2 = new Moralis.Query(CourseTokenId);
+    query2.equalTo("courseObjectId", id);
+    const courseTokenId = await query2.find();
+    setChosenIndex(courseTokenId[0].get("tokenId"));
+    // console.log(courseTokenId[0].get("tokenId"));
 
-    // onOpen();
-    window.alert("this broken :(")
+    const Courses = Moralis.Object.extend("Courses");
+    const query3 = new Moralis.Query(Courses);
+    query3.equalTo("objectId", coursePreReq);
+    const course = await query3.find();
+    setCoursePrereq(course[0]?.get("courseName"));
+
+    onOpen();
   }
 
   const handleEnroll = async () => {

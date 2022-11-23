@@ -70,7 +70,7 @@ const StudentRegistration = () => {
 
             await myDetails?.save();
 
-            let studentAddressTo = myDetails?.attributes.ethAddress;
+            let studentAddressTo = myDetails.attributes.ethAddress;
 
             const studentParams = {
                 to: studentAddressTo,
@@ -80,11 +80,11 @@ const StudentRegistration = () => {
                 const _Result = await Moralis.Cloud.run("registerStudent", studentParams);
                 console.log(_Result);
             }
-                callAddStudent();
-            }
-        catch (error) {
+            callAddStudent();
+
+        } catch (error) {
             window.alert(`ERROR: ${error.message} Please pick a new username!`);
-            window.reload();
+            routeChange();
         }
         
     };

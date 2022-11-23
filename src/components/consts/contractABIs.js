@@ -106,6 +106,12 @@ export const NFTEACH_SBT_CONTRACT_ABI = [
 				"internalType": "address",
 				"name": "student",
 				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "courseObjectId",
+				"type": "string"
 			}
 		],
 		"name": "MintSBT",
@@ -633,6 +639,11 @@ export const NFTEACH_SBT_CONTRACT_ABI = [
 			{
 				"internalType": "string",
 				"name": "certificate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_courseObjectId",
 				"type": "string"
 			}
 		],
