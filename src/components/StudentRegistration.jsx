@@ -58,6 +58,7 @@ const StudentRegistration = () => {
             const User = Moralis.Object.extend("_User");
             const query = new Moralis.Query(User);
             const myDetails = await query.first();
+            console.log(myDetails);
 
             if (username) {
                 myDetails?.set("username", username);
@@ -69,7 +70,7 @@ const StudentRegistration = () => {
 
             await myDetails?.save();
 
-            let studentAddressTo = myDetails?.attributes.ethAddress;
+            let studentAddressTo = myDetails.attributes.ethAddress;
 
             const studentParams = {
                 to: studentAddressTo,
@@ -79,11 +80,11 @@ const StudentRegistration = () => {
                 const _Result = await Moralis.Cloud.run("registerStudent", studentParams);
                 console.log(_Result);
             }
-                callAddStudent();
-            }
-        catch (error) {
+            callAddStudent();
+
+        } catch (error) {
             window.alert(`ERROR: ${error.message} Please pick a new username!`);
-            window.reload();
+            routeChange();
         }
         
     };

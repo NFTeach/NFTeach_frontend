@@ -6,7 +6,7 @@
 .frameDiv3,
 .titleDiv,
 .titleDiv1 {
-  align-self: stretch;
+  align-self: center;
   flex-shrink: 0;
 }
 .frameDiv3 {

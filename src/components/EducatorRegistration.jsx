@@ -11,6 +11,7 @@ moralis.serverURL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
 const EducatorRegistration = () => {
   const user = moralis.User.current();
+  console.log(user);
   const history = useHistory();
 
   const registerEducator = async () => {
@@ -25,7 +26,7 @@ const EducatorRegistration = () => {
         "registerEducator",
         educatorParams
       );
-      // console.log(_Result)
+      console.log(_Result)
     }
     callAddEducator();
   };

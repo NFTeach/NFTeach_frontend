@@ -106,6 +106,12 @@ export const NFTEACH_SBT_CONTRACT_ABI = [
 				"internalType": "address",
 				"name": "student",
 				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "courseObjectId",
+				"type": "string"
 			}
 		],
 		"name": "MintSBT",
@@ -336,6 +342,30 @@ export const NFTEACH_SBT_CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "certificates",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "counterIDs",
 		"outputs": [
@@ -395,6 +425,30 @@ export const NFTEACH_SBT_CONTRACT_ABI = [
 				"internalType": "bool",
 				"name": "active",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "student",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "testId",
+				"type": "uint256"
+			}
+		],
+		"name": "getCertificate",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -581,6 +635,16 @@ export const NFTEACH_SBT_CONTRACT_ABI = [
 				"internalType": "uint256",
 				"name": "_tokenId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "certificate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_courseObjectId",
+				"type": "string"
 			}
 		],
 		"name": "mintSBT",
@@ -1001,6 +1065,22 @@ export const NFTEACH_GOVERNOR_CONTRACT_ABI = [
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "AllowanceError",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NotEnoughWMatic",
+		"type": "error"
 	},
 	{
 		"anonymous": false,

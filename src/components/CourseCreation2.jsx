@@ -27,6 +27,7 @@ const CourseCreation2 = () => {
   const inputImageFile = useRef(null);
   const [uploadedImageFile, setUploadedImageFile] = useState(null);
   const [isUploadInProgress, setIsUploadInProgress] = useState(false);
+  console.log(uploadedImageFile);
 
   const saveImage = async () => {
     let img;
@@ -34,6 +35,7 @@ const CourseCreation2 = () => {
     if (uploadedImageFile) {
       const image = uploadedImageFile;
       const imageFile = new Moralis.File(image.name, image);
+      console.log(imageFile);
       await imageFile.saveIPFS();
       img = imageFile.ipfs();
       imgObject = { img };
@@ -95,7 +97,7 @@ const CourseCreation2 = () => {
         <div className={stylesFirstBlock.frameDiv}>
           <div className={stylesFirstBlock.frameDiv1}>
             <div className={stylesFirstBlock.titleDiv}>
-              Create your course (2/4)
+              Add your course image (2/4)
             </div>
           </div>
           <div className={stylesFirstBlock.frameDiv2}>

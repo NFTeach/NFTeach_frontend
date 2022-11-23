@@ -4,11 +4,11 @@ import { useMoralis } from "react-moralis";
 import { useHistory, Link } from "react-router-dom";
 import { defaultImgs } from "../images/defaultImgs";
 import {
-  HStack,
   Box,
   Image,
   Text,
   Button,
+  Input,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -37,12 +37,13 @@ const Explore = () => {
   const [images, setImages] = useState([]);
   const [courseName, setCourseName] = useState([]);
   const [courseDescription, setCourseDescription] = useState([]);
-  const [courseprerequisite, setCoursePrerequisite] = useState([]);
   const [prerequisitePass, setPrerequisitePass] = useState(false);
   const [userSBTs, setUserSBTs] = useState([]);
   const [userTokenIds, setUserTokenIds] = useState("");
+  const [userSbtCourseObjectIds, setUserSbtCourseObjectIds] = useState([]);
   const [chosenIndex, setChosenIndex] = useState();
   const [coursePrereq, setCoursePrereq] = useState();
+  const [searchInput, setSearchInput] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = moralis.User.current();
 
@@ -67,7 +68,6 @@ const Explore = () => {
       setImages(course.map((course) => course.get("imageFile")));
       setCourseName(course.map((course) => course.get("courseName")));
       setCourseDescription(course.map((course) => course.get("description")));
-      setCoursePrerequisite(course.map((course) => course.get("prerequisite")));
     }
   };
 
@@ -79,29 +79,43 @@ const Explore = () => {
     const mintSBT = await query.find();
     setUserSBTs(mintSBT);
     setUserTokenIds((mintSBT).map((mintSBT) => mintSBT.get("tokenId")));
+    setUserSbtCourseObjectIds((mintSBT).map((mintSBT) => mintSBT.get("courseObjectId")));
   };
+  // console.log(userSBTs)
+  // console.log(userSbtCourseObjectIds);
+  // console.log(coursePrerequisite);
 
-  const checkPrerequisite = async (index) => {
-    setChosenIndex(index);
-    const createSBTs = Moralis.Object.extend("CreateSBT");
-    const query = new Moralis.Query(createSBTs);
-    query.equalTo("courseObjectId", courseprerequisite[index]);
-    const createSBT = await query.find();
-    const courseSBT = createSBT.map((createSBT) => createSBT.get("tokenId"));
-    const prerequisiteSBT = userSBTs.filter((userSBT) => courseSBT.includes(userSBT.get("tokenId")));
+  const checkPrerequisite = async (id) => {
+    // console.log(id);
+    const CoursePrereq = Moralis.Object.extend("Courses");
+    const query = new Moralis.Query(CoursePrereq);
+    query.equalTo("objectId", id);
+    const coursePrereq = await query.find();
+    const coursePreReq = coursePrereq[0].get("prerequisite");
+    // console.log(coursePreReq);
+    const userSbtPass = userSbtCourseObjectIds.includes(coursePrereq[0].get("prerequisite"));
+    // console.log(userSbtPass);
+    // console.log(coursePrereq[0].get("prerequisite"));
 
-    if (courseprerequisite[index] === undefined) {
+    if(coursePreReq === undefined) {
       setPrerequisitePass(true);
-    } else if (prerequisiteSBT.length === 0) {
-      setPrerequisitePass(false);
+    } else if (userSbtPass === true) {
+      setPrerequisitePass(true);
     } else {
-      setPrerequisitePass(true);
+      setPrerequisitePass(false);
     }
 
+    const CourseTokenId = Moralis.Object.extend("CreateSBT");
+    const query2 = new Moralis.Query(CourseTokenId);
+    query2.equalTo("courseObjectId", id);
+    const courseTokenId = await query2.find();
+    setChosenIndex(courseTokenId[0].get("tokenId"));
+    // console.log(courseTokenId[0].get("tokenId"));
+
     const Courses = Moralis.Object.extend("Courses");
-    const query2 = new Moralis.Query(Courses);
-    query2.equalTo("objectId", courseprerequisite[index]);
-    const course = await query2.find();
+    const query3 = new Moralis.Query(Courses);
+    query3.equalTo("objectId", coursePreReq);
+    const course = await query3.find();
     setCoursePrereq(course[0]?.get("courseName"));
 
     onOpen();
@@ -128,9 +142,26 @@ const Explore = () => {
     if (!user) return null;
     setPfp(user.get("pfp"));
     getEducator();
-    getCourses();
     getUserSBTs();
   }, [user]);
+
+  useEffect(() => {
+    if (!user) return null;
+    getCourses();
+  }, []);
+
+  let inputHandler = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setSearchInput(lowerCase);
+  };
+
+  const filteredCourses = courses.filter((course) => {
+    if (searchInput === "") {
+      return course;
+    } else {
+      return course.get("courseName").toLowerCase().includes(searchInput.toLowerCase());
+    }
+  });
 
   const routeStudentDashboard = () => {
     history.push("/studentDashboard");
@@ -200,46 +231,53 @@ const Explore = () => {
       <div className={stylesFirstBlock.explorePageDiv}>
         <div className={stylesFirstBlock.frameDiv}>
           <div className={stylesFirstBlock.frameDiv1}>
-            <img
-              className={stylesFirstBlock.imageIcon}
-              alt=''
-              src={spaceMan}
-            />
+            <img className={stylesFirstBlock.imageIcon} alt="" src={spaceMan} />
             <div className={stylesFirstBlock.frameDiv2}>
               <div className={stylesFirstBlock.frameDiv3}>
-                <h1
-                  className={stylesFirstBlock.educationThatsH1}
-                >{`Education That’s `}</h1>
-                <h1 className={stylesFirstBlock.outOfThisWorld}>
-                  Out Of This World
-                </h1>
+                <h1 className={stylesFirstBlock.educationThatsH1}>{`Education That’s `}</h1>
+                <h1 className={stylesFirstBlock.outOfThisWorld}>Out Of This World</h1>
               </div>
               <h3 className={stylesFirstBlock.chooseACourseBelowToStart}>
-                Choose a course below to start learning
+                Choose a course below to start learning and earning
               </h3>
             </div>
           </div>
+          <Input
+            className={stylesFirstBlock.inputOutline}
+            variant="outline"
+            width="919px"
+            placeholder="Search Courses"
+            w="919px"
+            onChange={inputHandler}
+            value={searchInput}
+          />
           <div className={stylesFirstBlock.frameDiv3} >
-            <HStack spacing='100px'>
-              {courses?.map((e, index) => (
-                <Box key={index} w='250px' h='250px'>
-                  <Image
-                    borderRadius='full'
-                    boxSize='250px'
-                    src={images[index]?.img}
-                    alt={courseName?.[index]}
-                    onClick={async () => {
-                      await checkPrerequisite(index);
-                    }}
-                  />
-                  <br />
-                  <Text>{courseName?.[index]}</Text>
-                </Box>
-              ))}
-            </HStack>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+                  gridGap: "100px",
+                }}
+                >
+                {filteredCourses?.map((course, index) => (
+                  <Box key={index} w='215px' h='215px'>
+                    <Image
+                      borderRadius='full'
+                      boxSize='215px'
+                      src={course.attributes.imageFile.img}
+                      alt={course.attributes.courseName}
+                      onClick={async () => {
+                        await checkPrerequisite(course.id);
+                      }}
+                    />
+                    <br />
+                    <Text>{course.attributes.courseName}</Text>
+                  </Box>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       {/* Footer Block */}
       <div className={stylesFooter.frameDiv}>
         <h4 className={stylesFooter.nFTeachH4}>© 2022 NFTeach</h4>

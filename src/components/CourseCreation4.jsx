@@ -148,7 +148,7 @@ const CourseCreation4 = () => {
       {/* First Block */}
       <div className={stylesFirstBlock.courseCreationPage4}>
         <div className={stylesFirstBlock.frameDiv}>
-          <h1 className={stylesFirstBlock.titleH1}>Create your course (4/4)</h1>
+          <h1 className={stylesFirstBlock.titleH1}>Add your multiple choice test (4/4)</h1>
           <div className={stylesFirstBlock.frameDiv1}>
             <div className={stylesFirstBlock.qUESTION1Div}>
               <Input

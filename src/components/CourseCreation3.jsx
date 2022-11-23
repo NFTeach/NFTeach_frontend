@@ -160,14 +160,13 @@ const CourseCreation3 = () => {
             <div className={stylesFirstBlock.frameDiv2}>
               <div className={stylesFirstBlock.frameDiv3}>
                 <div className={stylesFirstBlock.titleDiv}>
-                  Create your course (3/4)
+                  Add your course content (3/4)
                 </div>
               </div>
               <div className={stylesFirstBlock.frameDiv4}>
                 <div className={stylesFirstBlock.titleDiv1}>
                   Add up to 3 sections. Each section should have a video element
-                  with a title of what will be learned and a description with
-                  notes and next steps (we don’t suggest homework but...)
+                  with a title of what will be learned and a description.
                 </div>
               </div>
             </div>
@@ -301,7 +300,7 @@ const CourseCreation3 = () => {
                 ref={inputVideoFile}
                 onChange={handleVideoUpload}
               />
-              Upload Section Video (10mb or less)
+              Upload Section Video (MAX: 10mb)
             </Button>
           </ModalBody>
           <ModalFooter>
